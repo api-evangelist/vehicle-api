@@ -1,10 +1,9 @@
 aid: vehicle-api
 name: Vehicle API
 description: >-
-  The Vehicle API is comprised of a collection of resources that provide access
-  to an array of automotive datasets related directly to the automotive vehicle.
-  First, you need to know the five components that fully describe an automotive
-  vehicle: 
+  The Vehicle API is comprised of a collection of resources that provide access to
+  an array of automotive datasets related directly to the automotive vehicle. First,
+  you need to know the five components that fully describe an automotive vehicle:.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -20,10 +19,10 @@ apis:
   - aid: vehicle-api:vehicle-api
     name: Vehicle API
     description: >-
-      The Vehicle API is comprised of a collection of resources that provide
-      access to an array of automotive datasets related directly to the
-      automotive vehicle. First, you need to know the five components that fully
-      describe an automotive vehicle: 
+      The Vehicle API is comprised of a collection of resources that provide access
+      to an array of automotive datasets related directly to the automotive vehicle.
+      First, you need to know the five components that fully describe an automotive
+      vehicle:.
     humanURL: ' https://developer.edmunds.com/api-documentation/vehicle/'
     tags:
       - API
