@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vehicle-api/refs/heads/main/json-structure/vehicle-api-style-structure.json",
+  "name": "Style",
+  "description": "Complete vehicle style (trim) with specs, options, and pricing",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Style ID",
+      "example": 401890697
+    },
+    "name": {
+      "type": "string",
+      "description": "Full style name",
+      "example": "LE 4dr Sedan"
+    },
+    "year": {
+      "$ref": "#/components/schemas/ModelYear"
+    },
+    "make": {
+      "$ref": "#/components/schemas/MakeSummary"
+    },
+    "model": {
+      "$ref": "#/components/schemas/ModelSummary"
+    },
+    "price": {
+      "$ref": "#/components/schemas/StylePrice"
+    },
+    "squishVins": {
+      "type": "array",
+      "description": "VIN squish codes for this style",
+      "items": {
+        "type": "string"
+      }
+    },
+    "categories": {
+      "type": "object",
+      "description": "Vehicle category classifications",
+      "properties": {
+        "primaryBodyType": {
+          "type": "string",
+          "example": "Cars"
+        },
+        "vehicleStyle": {
+          "type": "string",
+          "example": "Sedan"
+        },
+        "vehicleType": {
+          "type": "string",
+          "example": "Car"
+        },
+        "market": {
+          "type": "string",
+          "example": "Mainstream"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "vin": "4T1C11AK0SU123456",
+  "type": "new",
+  "make": "toyota",
+  "model": "camry",
+  "year": 2025,
+  "styleId": 401890697,
+  "trim": "LE",
+  "price": 27515,
+  "dealerPrice": 26800,
+  "dealerId": 12345,
+  "zip": "90210",
+  "mileage": 0
+}

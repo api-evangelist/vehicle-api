@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vehicle-api/refs/heads/main/json-schema/vehicle-api-inventory-item-schema.json",
+  "title": "InventoryItem",
+  "description": "A vehicle in dealer inventory",
+  "type": "object",
+  "properties": {
+    "vin": {
+      "type": "string",
+      "description": "17-character Vehicle Identification Number",
+      "example": "4T1C11AK0SU123456"
+    },
+    "type": {
+      "type": "string",
+      "description": "New or used",
+      "enum": [
+        "new",
+        "used",
+        "cpo"
+      ],
+      "example": "new"
+    },
+    "make": {
+      "type": "string",
+      "example": "toyota"
+    },
+    "model": {
+      "type": "string",
+      "example": "camry"
+    },
+    "year": {
+      "type": "integer",
+      "example": 2025
+    },
+    "styleId": {
+      "type": "integer",
+      "example": 401890697
+    },
+    "trim": {
+      "type": "string",
+      "example": "LE"
+    },
+    "price": {
+      "type": "number",
+      "description": "Asking price",
+      "example": 27515
+    },
+    "dealerPrice": {
+      "type": "number",
+      "description": "Edmunds estimated dealer price",
+      "example": 26800
+    },
+    "dealerId": {
+      "type": "integer",
+      "example": 12345
+    },
+    "zip": {
+      "type": "string",
+      "example": "90210"
+    },
+    "mileage": {
+      "type": "integer",
+      "description": "Odometer reading (for used vehicles)",
+      "example": 0
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": 401890697,
+  "name": "LE 4dr Sedan",
+  "year": "sample",
+  "make": "toyota",
+  "model": "camry",
+  "price": "sample",
+  "squishVins": [
+    "4T1C11AK0SU123456"
+  ],
+  "categories": {
+    "primaryBodyType": "Cars",
+    "vehicleStyle": "Sedan",
+    "vehicleType": "Car",
+    "market": "Mainstream"
+  }
+}

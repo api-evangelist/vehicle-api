@@ -1,0 +1,248 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Vehicle API (Edmunds)"
+  description: >-
+    Unified vocabulary for the Edmunds Vehicle API covering makes, models, styles,
+    pricing, media, and dealer inventory for automotive data applications.
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+operational:
+  apis:
+    - name: Vehicle API (Edmunds)
+      namespace: vehicle-api
+      version: "2.0"
+      baseUrl: "https://api.edmunds.com/api"
+      status: active
+
+  resources:
+    - name: makes
+      description: "Vehicle manufacturer brands (Toyota, Ford, BMW, etc.)"
+      actions: [list]
+    - name: models
+      description: "Vehicle model lines within a make (Camry, F-150, 3 Series)"
+      actions: [list]
+    - name: model-years
+      description: "Specific production years for a make/model with available trims"
+      actions: [list]
+    - name: styles
+      description: "Specific trim/body configurations with full specs and pricing"
+      actions: [get]
+    - name: pricing
+      description: "True Market Value and MSRP pricing data"
+      actions: [get]
+    - name: photos
+      description: "Vehicle exterior, interior, and color swatch images"
+      actions: [get]
+    - name: inventory
+      description: "Real-time dealer vehicle inventory listings"
+      actions: [search]
+
+  actions:
+    - name: list
+      httpMethod: GET
+      pattern: read
+      description: "Return a collection of vehicles, makes, models, or years"
+    - name: get
+      httpMethod: GET
+      pattern: read
+      description: "Return details for a specific vehicle style or pricing record"
+    - name: search
+      httpMethod: GET
+      pattern: query
+      description: "Search dealer inventory with geographic and vehicle filters"
+
+  schemas:
+    core:
+      - name: Make
+        description: "Vehicle manufacturer with name, ID, and models"
+        key_properties: [id, name, niceName, models]
+      - name: Model
+        description: "Vehicle model with make reference and available years"
+        key_properties: [id, name, niceName, make]
+      - name: Style
+        description: "Vehicle trim/body configuration with specs and pricing"
+        key_properties: [id, name, year, make, model, price, categories]
+    pricing:
+      - name: StylePrice
+        description: "MSRP, invoice, and TMV pricing for a vehicle style"
+        key_properties: [baseMSRP, baseInvoice, tmv, destinationCharge]
+      - name: PriceResponse
+        description: "TMV pricing response with style ID and zip code context"
+        key_properties: [styleId, zip, tmvPrice]
+    inventory:
+      - name: InventoryItem
+        description: "Dealer inventory listing with VIN, price, and location"
+        key_properties: [vin, type, make, model, year, styleId, price, dealerId, zip]
+    media:
+      - name: Photo
+        description: "Vehicle photo with multiple size variants and CDN URLs"
+        key_properties: [id, title, category, tags, sizes]
+
+  parameters:
+    identification:
+      - name: makeNiceName
+        type: string
+        description: "URL-friendly make name slug (e.g. toyota, ford)"
+      - name: modelNiceName
+        type: string
+        description: "URL-friendly model name slug (e.g. camry, f-150)"
+      - name: styleId
+        type: integer
+        description: "Edmunds unique style identifier"
+    geo:
+      - name: zip
+        type: string
+        description: "5-digit US ZIP code for regional pricing and inventory"
+      - name: radius
+        type: integer
+        description: "Search radius in miles for inventory search"
+    filters:
+      - name: state
+        type: string
+        description: "Vehicle availability state: new, used, or future"
+      - name: year
+        type: integer
+        description: "4-digit model year filter"
+      - name: condition
+        type: string
+        description: "Used vehicle condition: Outstanding, Clean, Average, Rough"
+    pagination:
+      - name: pageSize
+        type: integer
+        description: "Results per page (max 100)"
+      - name: pageNum
+        type: integer
+        description: "1-based page number"
+
+  enums:
+    vehicle_states:
+      - new
+      - used
+      - future
+      - cpo
+    vehicle_conditions:
+      - Outstanding
+      - Clean
+      - Average
+      - Rough
+    photo_categories:
+      - exterior
+      - interior
+      - color
+      - 360
+    body_types:
+      - Sedan
+      - SUV
+      - Truck
+      - Coupe
+      - Convertible
+      - Wagon
+      - Van
+      - Hatchback
+
+  authentication:
+    schemes:
+      - name: ApiKey
+        type: apiKey
+        placement: query
+        paramName: api_key
+        description: "Edmunds developer API key obtained from developer.edmunds.com"
+
+capability:
+  workflows:
+    - name: Vehicle Data
+      file: capabilities/vehicle-data.yaml
+      description: >-
+        Automotive vehicle research workflow combining catalog, pricing, media,
+        and inventory for car shoppers, dealer platforms, and automotive apps.
+      apis_combined:
+        - vehicle-api
+      tool_count: 7
+      personas:
+        - Car Shopper
+        - Dealer Platform Developer
+        - Automotive App Developer
+
+  personas:
+    - id: car-shopper
+      name: Car Shopper
+      description: >-
+        Researches vehicle makes, models, specs, and pricing to make informed
+        purchase decisions. Uses TMV pricing and inventory search to find deals.
+      workflows:
+        - Vehicle Data
+    - id: dealer-platform-developer
+      name: Dealer Platform Developer
+      description: >-
+        Builds dealer websites, inventory management systems, and CRM integrations
+        powered by Edmunds vehicle data, pricing, and inventory APIs.
+      workflows:
+        - Vehicle Data
+    - id: automotive-app-developer
+      name: Automotive App Developer
+      description: >-
+        Creates automotive comparison tools, configurators, and shopping apps
+        using the full Edmunds API surface for vehicle data and pricing.
+      workflows:
+        - Vehicle Data
+
+  domains:
+    - name: Vehicle Catalog
+      description: "Makes, models, years, and style/trim configurations"
+      resources: [makes, models, model-years, styles]
+      workflows: [Vehicle Data]
+    - name: Pricing
+      description: "MSRP, invoice, and True Market Value pricing"
+      resources: [pricing]
+      workflows: [Vehicle Data]
+    - name: Media
+      description: "Vehicle photos and videos"
+      resources: [photos]
+      workflows: [Vehicle Data]
+    - name: Inventory
+      description: "Dealer vehicle listings and availability"
+      resources: [inventory]
+      workflows: [Vehicle Data]
+
+  namespaces:
+    consumed:
+      - vehicle-api
+    rest_exposed:
+      - name: vehicle-data-api
+        port: 8080
+    mcp_exposed:
+      - name: vehicle-data-mcp
+        port: 9090
+
+  binds:
+    - name: EDMUNDS_API_KEY
+      description: "Edmunds developer API key"
+      workflows: [Vehicle Data]
+
+crossReference:
+  - resource: makes
+    operations: [listMakes]
+    workflows: [Vehicle Data]
+    personas: [Car Shopper, Automotive App Developer]
+  - resource: models
+    operations: [listModels]
+    workflows: [Vehicle Data]
+    personas: [Car Shopper, Automotive App Developer]
+  - resource: styles
+    operations: [getStyle, listModelYears]
+    workflows: [Vehicle Data]
+    personas: [Car Shopper, Dealer Platform Developer, Automotive App Developer]
+  - resource: pricing
+    operations: [getTMVPrice]
+    workflows: [Vehicle Data]
+    personas: [Car Shopper, Dealer Platform Developer]
+  - resource: photos
+    operations: [getStylePhotos]
+    workflows: [Vehicle Data]
+    personas: [Car Shopper, Dealer Platform Developer, Automotive App Developer]
+  - resource: inventory
+    operations: [searchInventory]
+    workflows: [Vehicle Data]
+    personas: [Car Shopper, Dealer Platform Developer]

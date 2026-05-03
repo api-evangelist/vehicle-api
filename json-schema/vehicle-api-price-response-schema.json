@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vehicle-api/refs/heads/main/json-schema/vehicle-api-price-response-schema.json",
+  "title": "PriceResponse",
+  "description": "TMV pricing response for a vehicle style",
+  "type": "object",
+  "properties": {
+    "styleId": {
+      "type": "integer",
+      "example": 401890697
+    },
+    "zip": {
+      "type": "string",
+      "example": "90210"
+    },
+    "tmvPrice": {
+      "$ref": "#/components/schemas/StylePrice"
+    }
+  }
+}

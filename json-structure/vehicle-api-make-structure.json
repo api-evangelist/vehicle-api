@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vehicle-api/refs/heads/main/json-structure/vehicle-api-make-structure.json",
+  "name": "Make",
+  "description": "Vehicle manufacturer make",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Unique make ID",
+      "example": 200001444
+    },
+    "name": {
+      "type": "string",
+      "description": "Make display name",
+      "example": "Toyota"
+    },
+    "niceName": {
+      "type": "string",
+      "description": "URL-friendly make name (slug)",
+      "example": "toyota"
+    },
+    "models": {
+      "type": "array",
+      "description": "Models for this make (in full view)",
+      "items": {
+        "$ref": "#/components/schemas/ModelSummary"
+      }
+    }
+  }
+}

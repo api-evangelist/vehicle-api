@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vehicle-api/refs/heads/main/json-structure/vehicle-api-model-year-structure.json",
+  "name": "ModelYear",
+  "description": "A specific model year with available styles",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Model year ID",
+      "example": 100538647
+    },
+    "year": {
+      "type": "int32",
+      "description": "Model year (4-digit)",
+      "example": 2025
+    },
+    "states": {
+      "type": "array",
+      "description": "Availability states: new, used, future",
+      "items": {
+        "type": "string"
+      }
+    },
+    "styles": {
+      "type": "array",
+      "description": "Available trim styles for this year",
+      "items": {
+        "$ref": "#/components/schemas/StyleSummary"
+      }
+    }
+  }
+}

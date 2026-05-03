@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vehicle-api/refs/heads/main/json-structure/vehicle-api-photo-structure.json",
+  "name": "Photo",
+  "description": "Vehicle photo asset with multiple size variants",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Photo identifier",
+      "example": "toyota_camry_2025_le_001"
+    },
+    "title": {
+      "type": "string",
+      "description": "Photo description",
+      "example": "Toyota Camry 2025 LE Front 3/4"
+    },
+    "category": {
+      "type": "string",
+      "description": "Photo category: exterior, interior, color",
+      "example": "exterior"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "front 3/4",
+        "exterior"
+      ]
+    },
+    "sizes": {
+      "type": "array",
+      "description": "Available image sizes with URLs",
+      "items": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "type": "string",
+            "example": "98x65"
+          },
+          "link": {
+            "type": "uri"
+          }
+        }
+      }
+    }
+  }
+}

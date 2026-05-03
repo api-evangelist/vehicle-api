@@ -1,0 +1,9 @@
+{
+  "id": "Toyota_Camry",
+  "name": "Camry",
+  "niceName": "camry",
+  "make": "toyota",
+  "years": [
+    "sample"
+  ]
+}

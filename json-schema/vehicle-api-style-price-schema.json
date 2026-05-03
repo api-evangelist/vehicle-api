@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vehicle-api/refs/heads/main/json-schema/vehicle-api-style-price-schema.json",
+  "title": "StylePrice",
+  "description": "Pricing information for a vehicle style",
+  "type": "object",
+  "properties": {
+    "baseMSRP": {
+      "type": "number",
+      "description": "Manufacturer Suggested Retail Price",
+      "example": 27515
+    },
+    "baseInvoice": {
+      "type": "number",
+      "description": "Dealer invoice price",
+      "example": 25940
+    },
+    "tmv": {
+      "type": "number",
+      "description": "True Market Value estimate",
+      "example": 26800
+    },
+    "destinationCharge": {
+      "type": "number",
+      "description": "Destination and delivery charge",
+      "example": 1095
+    }
+  }
+}

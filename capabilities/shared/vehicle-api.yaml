@@ -1,0 +1,245 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Vehicle API (Edmunds)"
+  description: >-
+    Edmunds Vehicle API providing makes, models, styles, TMV pricing, media,
+    dealer inventory, incentives, and vehicle reviews for automotive applications.
+  tags:
+    - Automotive
+    - Cars
+    - Edmunds
+    - Pricing
+    - Vehicles
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      EDMUNDS_API_KEY: EDMUNDS_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: vehicle-api
+      baseUri: "https://api.edmunds.com/api"
+      description: "Edmunds Vehicle API v2"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.EDMUNDS_API_KEY}}"
+        placement: query
+      resources:
+        - name: makes
+          path: /vehicle/v2/makes
+          description: "List all vehicle makes with optional year and state filtering"
+          operations:
+            - name: list-makes
+              method: GET
+              description: "Return all vehicle makes filtered by state and year"
+              inputParameters:
+                - name: state
+                  in: query
+                  type: string
+                  required: false
+                  description: "new, used, or future"
+                - name: year
+                  in: query
+                  type: integer
+                  required: false
+                  description: "4-digit model year"
+                - name: view
+                  in: query
+                  type: string
+                  required: false
+                  description: "basic or full"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: models
+          path: /vehicle/v2/makes/{makeNiceName}/models
+          description: "List vehicle models for a given make"
+          operations:
+            - name: list-models
+              method: GET
+              description: "Return all models for a vehicle make"
+              inputParameters:
+                - name: makeNiceName
+                  in: path
+                  type: string
+                  required: true
+                  description: "URL-friendly make name (e.g. toyota)"
+                - name: state
+                  in: query
+                  type: string
+                  required: false
+                  description: "new, used, or future"
+                - name: year
+                  in: query
+                  type: integer
+                  required: false
+                  description: "4-digit model year"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: model-years
+          path: /vehicle/v2/makes/{makeNiceName}/models/{modelNiceName}/years
+          description: "List available model years and styles for a make/model"
+          operations:
+            - name: list-model-years
+              method: GET
+              description: "Return all model years and trims for a make and model"
+              inputParameters:
+                - name: makeNiceName
+                  in: path
+                  type: string
+                  required: true
+                  description: "URL-friendly make name"
+                - name: modelNiceName
+                  in: path
+                  type: string
+                  required: true
+                  description: "URL-friendly model name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: style
+          path: /vehicle/v2/styles/{styleId}
+          description: "Get complete details for a vehicle style (trim)"
+          operations:
+            - name: get-style
+              method: GET
+              description: "Return complete vehicle style data including specs and pricing"
+              inputParameters:
+                - name: styleId
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Edmunds style ID"
+                - name: view
+                  in: query
+                  type: string
+                  required: false
+                  description: "basic or full"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: tmv-price
+          path: /vehicle/v2/price/tmv/simple
+          description: "Get True Market Value pricing for a vehicle style"
+          operations:
+            - name: get-tmv-price
+              method: GET
+              description: "Return TMV pricing for a vehicle style by zip code"
+              inputParameters:
+                - name: styleId
+                  in: query
+                  type: integer
+                  required: true
+                  description: "Edmunds style ID"
+                - name: zip
+                  in: query
+                  type: string
+                  required: true
+                  description: "5-digit US ZIP code"
+                - name: state
+                  in: query
+                  type: string
+                  required: false
+                  description: "new or used"
+                - name: mileage
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Mileage for used vehicle pricing"
+                - name: condition
+                  in: query
+                  type: string
+                  required: false
+                  description: "Outstanding, Clean, Average, or Rough"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: photos
+          path: /vehicle/v2/media/{styleId}/photos
+          description: "Get vehicle photos for a style"
+          operations:
+            - name: get-style-photos
+              method: GET
+              description: "Return photo assets for a vehicle style in multiple sizes"
+              inputParameters:
+                - name: styleId
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Edmunds style ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: inventory
+          path: /vehicle/v2/inventory
+          description: "Search dealer inventory by make, model, and location"
+          operations:
+            - name: search-inventory
+              method: GET
+              description: "Search dealer inventory with make, model, year, and zip code filters"
+              inputParameters:
+                - name: make
+                  in: query
+                  type: string
+                  required: true
+                  description: "Make nice name (e.g. toyota)"
+                - name: model
+                  in: query
+                  type: string
+                  required: true
+                  description: "Model nice name (e.g. camry)"
+                - name: year
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Model year"
+                - name: zip
+                  in: query
+                  type: string
+                  required: true
+                  description: "5-digit ZIP code"
+                - name: radius
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Search radius in miles"
+                - name: pageSize
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Results per page"
+                - name: pageNum
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page number"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

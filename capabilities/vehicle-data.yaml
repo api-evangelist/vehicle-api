@@ -1,0 +1,252 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Vehicle Data Workflow"
+  description: >-
+    Customer workflow capability for automotive vehicle data research and shopping.
+    Combines Edmunds vehicle catalog (makes, models, styles), TMV pricing,
+    media assets, and dealer inventory into a unified interface for car
+    shoppers, dealer platforms, and automotive application developers.
+  tags:
+    - Automotive
+    - Cars
+    - Edmunds
+    - Inventory
+    - Pricing
+    - Vehicles
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      EDMUNDS_API_KEY: EDMUNDS_API_KEY
+
+capability:
+  consumes:
+    - import: vehicle-api
+      location: ./shared/vehicle-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: vehicle-data-api
+      description: "Unified REST API for vehicle data research and automotive shopping workflows."
+      resources:
+        - path: /v1/makes
+          name: makes
+          description: "List vehicle makes"
+          operations:
+            - method: GET
+              name: list-makes
+              description: "List all vehicle makes with optional year and availability filtering"
+              call: "vehicle-api.list-makes"
+              with:
+                state: "rest.state"
+                year: "rest.year"
+                view: "rest.view"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/makes/{makeNiceName}/models
+          name: models
+          description: "List models for a vehicle make"
+          operations:
+            - method: GET
+              name: list-models
+              description: "List all models for a given vehicle make"
+              call: "vehicle-api.list-models"
+              with:
+                makeNiceName: "rest.makeNiceName"
+                state: "rest.state"
+                year: "rest.year"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/makes/{makeNiceName}/models/{modelNiceName}/years
+          name: model-years
+          description: "List model years and trim styles"
+          operations:
+            - method: GET
+              name: list-model-years
+              description: "List available years and trim styles for a make/model"
+              call: "vehicle-api.list-model-years"
+              with:
+                makeNiceName: "rest.makeNiceName"
+                modelNiceName: "rest.modelNiceName"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/styles/{styleId}
+          name: style
+          description: "Get vehicle style details"
+          operations:
+            - method: GET
+              name: get-style
+              description: "Get complete specs, options, and pricing for a vehicle style"
+              call: "vehicle-api.get-style"
+              with:
+                styleId: "rest.styleId"
+                view: "rest.view"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/pricing/tmv
+          name: tmv-pricing
+          description: "Get True Market Value pricing"
+          operations:
+            - method: GET
+              name: get-tmv-price
+              description: "Get Edmunds TMV price for a vehicle style by zip code"
+              call: "vehicle-api.get-tmv-price"
+              with:
+                styleId: "rest.styleId"
+                zip: "rest.zip"
+                state: "rest.state"
+                mileage: "rest.mileage"
+                condition: "rest.condition"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/styles/{styleId}/photos
+          name: photos
+          description: "Get vehicle photos"
+          operations:
+            - method: GET
+              name: get-style-photos
+              description: "Get photo assets for a vehicle style"
+              call: "vehicle-api.get-style-photos"
+              with:
+                styleId: "rest.styleId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/inventory
+          name: inventory
+          description: "Search dealer inventory"
+          operations:
+            - method: GET
+              name: search-inventory
+              description: "Search dealer inventory by make, model, and location"
+              call: "vehicle-api.search-inventory"
+              with:
+                make: "rest.make"
+                model: "rest.model"
+                year: "rest.year"
+                zip: "rest.zip"
+                radius: "rest.radius"
+                pageSize: "rest.pageSize"
+                pageNum: "rest.pageNum"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: vehicle-data-mcp
+      transport: http
+      description: "MCP server for AI-assisted automotive vehicle research and shopping."
+      tools:
+        - name: list-makes
+          description: "List all vehicle makes available in the Edmunds catalog"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vehicle-api.list-makes"
+          with:
+            state: "tools.state"
+            year: "tools.year"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-models
+          description: "List all models for a specific vehicle make"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vehicle-api.list-models"
+          with:
+            makeNiceName: "tools.makeNiceName"
+            state: "tools.state"
+            year: "tools.year"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-model-years
+          description: "List available model years and trim styles for a make and model"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vehicle-api.list-model-years"
+          with:
+            makeNiceName: "tools.makeNiceName"
+            modelNiceName: "tools.modelNiceName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-style
+          description: "Get complete vehicle style details including specs, options, and pricing"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vehicle-api.get-style"
+          with:
+            styleId: "tools.styleId"
+            view: "tools.view"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-tmv-price
+          description: "Get Edmunds True Market Value price for a vehicle style at a given zip code"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vehicle-api.get-tmv-price"
+          with:
+            styleId: "tools.styleId"
+            zip: "tools.zip"
+            state: "tools.state"
+            mileage: "tools.mileage"
+            condition: "tools.condition"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-style-photos
+          description: "Get photo assets for a vehicle style in multiple sizes"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "vehicle-api.get-style-photos"
+          with:
+            styleId: "tools.styleId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: search-inventory
+          description: "Search dealer inventory near a zip code for a specific make, model, and year"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vehicle-api.search-inventory"
+          with:
+            make: "tools.make"
+            model: "tools.model"
+            year: "tools.year"
+            zip: "tools.zip"
+            radius: "tools.radius"
+            pageSize: "tools.pageSize"
+          outputParameters:
+            - type: object
+              mapping: "$."

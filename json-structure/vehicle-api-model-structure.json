@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vehicle-api/refs/heads/main/json-structure/vehicle-api-model-structure.json",
+  "name": "Model",
+  "description": "Detailed vehicle model information",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Model identifier",
+      "example": "Toyota_Camry"
+    },
+    "name": {
+      "type": "string",
+      "description": "Model display name",
+      "example": "Camry"
+    },
+    "niceName": {
+      "type": "string",
+      "description": "URL-friendly model name",
+      "example": "camry"
+    },
+    "make": {
+      "$ref": "#/components/schemas/MakeSummary"
+    },
+    "years": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ModelYear"
+      }
+    }
+  }
+}
