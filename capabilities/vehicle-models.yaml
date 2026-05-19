@@ -1,0 +1,101 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vehicle API (Edmunds) — Models
+  description: 'Vehicle API (Edmunds) — Models. 1 operations. Lead operation: Vehicle API List Models. Self-contained Naftiko
+    capability covering one Vehicle Api business surface.'
+  tags:
+  - Vehicle Api
+  - Models
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VEHICLE_API_API_KEY: VEHICLE_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: vehicle-models
+    baseUri: https://api.edmunds.com/api
+    description: Vehicle API (Edmunds) — Models business capability. Self-contained, no shared references.
+    resources:
+    - name: vehicle-v2-makes-makeNiceName-models
+      path: /vehicle/v2/makes/{makeNiceName}/models
+      operations:
+      - name: listmodels
+        method: GET
+        description: Vehicle API List Models
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: makeNiceName
+          in: path
+          type: string
+          description: URL-friendly make name (e.g. toyota, ford, chevrolet)
+          required: true
+        - name: state
+          in: query
+          type: string
+          description: 'Publication state: new, used, or future'
+        - name: year
+          in: query
+          type: integer
+          description: Filter by model year
+        - name: api_key
+          in: query
+          type: string
+          description: Edmunds API key
+          required: true
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.VEHICLE_API_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: vehicle-models-rest
+    port: 8080
+    description: REST adapter for Vehicle API (Edmunds) — Models. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/vehicle/v2/makes/{makenicename}/models
+      name: vehicle-v2-makes-makenicename-models
+      description: REST surface for vehicle-v2-makes-makeNiceName-models.
+      operations:
+      - method: GET
+        name: listmodels
+        description: Vehicle API List Models
+        call: vehicle-models.listmodels
+        with:
+          makeNiceName: rest.makeNiceName
+          state: rest.state
+          year: rest.year
+          api_key: rest.api_key
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: vehicle-models-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vehicle API (Edmunds) — Models. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: vehicle-api-list-models
+      description: Vehicle API List Models
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: vehicle-models.listmodels
+      with:
+        makeNiceName: tools.makeNiceName
+        state: tools.state
+        year: tools.year
+        api_key: tools.api_key
+      outputParameters:
+      - type: object
+        mapping: $.

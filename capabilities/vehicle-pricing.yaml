@@ -1,0 +1,114 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vehicle API (Edmunds) — Pricing
+  description: 'Vehicle API (Edmunds) — Pricing. 1 operations. Lead operation: Vehicle API Get TMV Price. Self-contained Naftiko
+    capability covering one Vehicle Api business surface.'
+  tags:
+  - Vehicle Api
+  - Pricing
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VEHICLE_API_API_KEY: VEHICLE_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: vehicle-pricing
+    baseUri: https://api.edmunds.com/api
+    description: Vehicle API (Edmunds) — Pricing business capability. Self-contained, no shared references.
+    resources:
+    - name: vehicle-v2-price-tmv-simple
+      path: /vehicle/v2/price/tmv/simple
+      operations:
+      - name: gettmvprice
+        method: GET
+        description: Vehicle API Get TMV Price
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: styleId
+          in: query
+          type: integer
+          description: Edmunds style ID
+          required: true
+        - name: zip
+          in: query
+          type: string
+          description: 5-digit US ZIP code for regional pricing
+          required: true
+        - name: state
+          in: query
+          type: string
+          description: 'Vehicle condition: new or used'
+        - name: mileage
+          in: query
+          type: integer
+          description: Mileage for used vehicle valuation
+        - name: condition
+          in: query
+          type: string
+          description: 'Used vehicle condition: Outstanding, Clean, Average, Rough'
+        - name: api_key
+          in: query
+          type: string
+          description: Edmunds API key
+          required: true
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.VEHICLE_API_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: vehicle-pricing-rest
+    port: 8080
+    description: REST adapter for Vehicle API (Edmunds) — Pricing. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/vehicle/v2/price/tmv/simple
+      name: vehicle-v2-price-tmv-simple
+      description: REST surface for vehicle-v2-price-tmv-simple.
+      operations:
+      - method: GET
+        name: gettmvprice
+        description: Vehicle API Get TMV Price
+        call: vehicle-pricing.gettmvprice
+        with:
+          styleId: rest.styleId
+          zip: rest.zip
+          state: rest.state
+          mileage: rest.mileage
+          condition: rest.condition
+          api_key: rest.api_key
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: vehicle-pricing-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vehicle API (Edmunds) — Pricing. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: vehicle-api-get-tmv-price
+      description: Vehicle API Get TMV Price
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: vehicle-pricing.gettmvprice
+      with:
+        styleId: tools.styleId
+        zip: tools.zip
+        state: tools.state
+        mileage: tools.mileage
+        condition: tools.condition
+        api_key: tools.api_key
+      outputParameters:
+      - type: object
+        mapping: $.
