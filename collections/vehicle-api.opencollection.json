@@ -1,0 +1,337 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vehicle API (Edmunds)",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Makes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle API List Makes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/makes",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Publication state filter: new, used, or future"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Filter by model year (4-digit year)"
+              },
+              {
+                "name": "view",
+                "value": "",
+                "type": "query",
+                "description": "Response detail level: basic or full"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Returns a list of all vehicle makes (manufacturers). Supports filtering by publication state, vehicle type, and year. Returns make ID, name, nice name (URL-friendly slug), and model count."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle API List Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/makes/:makeNiceName/models",
+            "params": [
+              {
+                "name": "makeNiceName",
+                "value": "toyota",
+                "type": "path",
+                "description": "URL-friendly make name (e.g. toyota, ford, chevrolet)"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Publication state: new, used, or future"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Filter by model year"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Returns all models for a given vehicle make. Supports filtering by publication state and year. Returns model ID, name, nice name, and the parent make."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Styles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle API List Model Years",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/makes/:makeNiceName/models/:modelNiceName/years",
+            "params": [
+              {
+                "name": "makeNiceName",
+                "value": "toyota",
+                "type": "path",
+                "description": "URL-friendly make name"
+              },
+              {
+                "name": "modelNiceName",
+                "value": "camry",
+                "type": "path",
+                "description": "URL-friendly model name"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Returns all available model years for a specific make and model. Includes publication state and the list of styles (trims) for each year."
+        },
+        {
+          "info": {
+            "name": "Vehicle API Get Style",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/styles/:styleId",
+            "params": [
+              {
+                "name": "styleId",
+                "value": "401890697",
+                "type": "path",
+                "description": "Edmunds style ID"
+              },
+              {
+                "name": "view",
+                "value": "",
+                "type": "query",
+                "description": "Response detail level: basic or full"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Returns complete details for a specific vehicle style (trim), including specifications, options, standard equipment, colors, and pricing."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pricing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle API Get TMV Price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/price/tmv/simple",
+            "params": [
+              {
+                "name": "styleId",
+                "value": "401890697",
+                "type": "query",
+                "description": "Edmunds style ID"
+              },
+              {
+                "name": "zip",
+                "value": "90210",
+                "type": "query",
+                "description": "5-digit US ZIP code for regional pricing"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle condition: new or used"
+              },
+              {
+                "name": "mileage",
+                "value": "",
+                "type": "query",
+                "description": "Mileage for used vehicle valuation"
+              },
+              {
+                "name": "condition",
+                "value": "",
+                "type": "query",
+                "description": "Used vehicle condition: Outstanding, Clean, Average, Rough"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Returns True Market Value (TMV) pricing for a vehicle style. TMV is Edmunds' estimate of what consumers are actually paying for a vehicle in a given area. Supports new and used vehicle pricing with zip code localization."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Media",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle API Get Style Photos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/media/:styleId/photos",
+            "params": [
+              {
+                "name": "styleId",
+                "value": "401890697",
+                "type": "path",
+                "description": "Edmunds style ID"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Returns photo assets for a specific vehicle style, including exterior, interior, and color swatch images with multiple sizes. Photos are available via the Edmunds CDN."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Inventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle API Search Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/inventory",
+            "params": [
+              {
+                "name": "make",
+                "value": "toyota",
+                "type": "query",
+                "description": "Vehicle make nice name (e.g. toyota)"
+              },
+              {
+                "name": "model",
+                "value": "camry",
+                "type": "query",
+                "description": "Vehicle model nice name (e.g. camry)"
+              },
+              {
+                "name": "year",
+                "value": "2025",
+                "type": "query",
+                "description": "Model year filter"
+              },
+              {
+                "name": "zip",
+                "value": "90210",
+                "type": "query",
+                "description": "5-digit ZIP code for dealer search"
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Search radius in miles (default 50)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Results per page (max 100)"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-based)"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Search dealer inventory for vehicles matching make, model, year, and geographic criteria. Returns a list of matching vehicles with dealer information, pricing, and listing details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
