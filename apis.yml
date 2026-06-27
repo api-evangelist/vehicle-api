@@ -62,10 +62,10 @@ apis:
       - type: JSONStructure
         url: json-structure/vehicle-api-model-structure.json
         title: Vehicle Model Structure
-      - type: Example
+      - type: Examples
         url: examples/vehicle-api-make-example.json
         title: Vehicle Make Example
-      - type: Example
+      - type: Examples
         url: examples/vehicle-api-style-example.json
         title: Vehicle Style Example
 common:
