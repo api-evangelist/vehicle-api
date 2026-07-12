@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/vehicle-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: ApiKey
+  type: apiKey
+  in: query
+  parameter: api_key
+  description: Edmunds API key obtained from developer.edmunds.com
+  sources:
+  - openapi/vehicle-api-openapi.yml
