@@ -69,6 +69,8 @@ apis:
         url: examples/vehicle-api-style-example.json
         title: Vehicle Style Example
 common:
+  - type: AgenticAccess
+    url: agentic-access/vehicle-api-agentic-access.yml
   - type: DomainSecurity
     url: security/vehicle-api-domain-security.yml
   - type: Authentication

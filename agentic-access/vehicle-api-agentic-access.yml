@@ -1,0 +1,84 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/vehicle-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 7
+  by_action_class:
+    connected: 7
+  by_consequence:
+    read: 7
+  human_in_the_loop_required: 0
+operations:
+- path: /vehicle/v2/makes
+  method: get
+  operationId: listMakes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /vehicle/v2/makes/{makeNiceName}/models
+  method: get
+  operationId: listModels
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /vehicle/v2/makes/{makeNiceName}/models/{modelNiceName}/years
+  method: get
+  operationId: listModelYears
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /vehicle/v2/styles/{styleId}
+  method: get
+  operationId: getStyle
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /vehicle/v2/price/tmv/simple
+  method: get
+  operationId: getTMVPrice
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /vehicle/v2/media/{styleId}/photos
+  method: get
+  operationId: getStylePhotos
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /vehicle/v2/inventory
+  method: get
+  operationId: searchInventory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
