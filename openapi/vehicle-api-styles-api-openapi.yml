@@ -1,0 +1,293 @@
+openapi: 3.1.0
+info:
+  title: Vehicle API (Edmunds) Inventory Styles API
+  description: The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.
+  version: '2.0'
+  contact:
+    name: Edmunds Developer Support
+    url: https://developer.edmunds.com/support/
+  license:
+    name: Edmunds API Terms of Service
+    url: https://developer.edmunds.com/terms/
+  x-generated-from: documentation
+servers:
+- url: https://api.edmunds.com/api
+  description: Edmunds API
+security:
+- ApiKey: []
+tags:
+- name: Styles
+  description: Vehicle trim and style configurations
+paths:
+  /vehicle/v2/makes/{makeNiceName}/models/{modelNiceName}/years:
+    get:
+      operationId: listModelYears
+      summary: Vehicle API List Model Years
+      description: Returns all available model years for a specific make and model. Includes publication state and the list of styles (trims) for each year.
+      tags:
+      - Styles
+      parameters:
+      - name: makeNiceName
+        in: path
+        required: true
+        description: URL-friendly make name
+        schema:
+          type: string
+        example: toyota
+      - name: modelNiceName
+        in: path
+        required: true
+        description: URL-friendly model name
+        schema:
+          type: string
+        example: camry
+      - name: api_key
+        in: query
+        required: true
+        description: Edmunds API key
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of model years with styles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelYearsResponse'
+              examples:
+                ListModelYears200Example:
+                  summary: Default listModelYears 200 response
+                  x-microcks-default: true
+                  value:
+                    years:
+                    - id: 100538647
+                      year: 2025
+                      states:
+                      - new
+                      styles:
+                      - id: 401890697
+                        name: LE 4dr Sedan
+                        submodel:
+                          body: Sedan
+                          fuel: Gas
+                          tuner: Standard
+        '404':
+          description: Make or model not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /vehicle/v2/styles/{styleId}:
+    get:
+      operationId: getStyle
+      summary: Vehicle API Get Style
+      description: Returns complete details for a specific vehicle style (trim), including specifications, options, standard equipment, colors, and pricing.
+      tags:
+      - Styles
+      parameters:
+      - name: styleId
+        in: path
+        required: true
+        description: Edmunds style ID
+        schema:
+          type: integer
+        example: 401890697
+      - name: view
+        in: query
+        description: 'Response detail level: basic or full'
+        schema:
+          type: string
+          enum:
+          - basic
+          - full
+          default: basic
+      - name: api_key
+        in: query
+        required: true
+        description: Edmunds API key
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Vehicle style details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Style'
+              examples:
+                GetStyle200Example:
+                  summary: Default getStyle 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 401890697
+                    name: LE 4dr Sedan
+                    year:
+                      id: 100538647
+                      year: 2025
+                    make:
+                      id: 200001444
+                      name: Toyota
+                      niceName: toyota
+                    model:
+                      id: Toyota_Camry
+                      name: Camry
+                      niceName: camry
+                    price:
+                      baseMSRP: 27515
+                      baseInvoice: 25940
+                      tmv: 26800
+        '404':
+          description: Style not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ModelYearsResponse:
+      type: object
+      properties:
+        years:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelYear'
+    ModelSummary:
+      type: object
+      description: Summary representation of a vehicle model
+      properties:
+        id:
+          type: string
+          description: Model identifier (Make_Model format)
+          example: Toyota_Camry
+        name:
+          type: string
+          description: Model display name
+          example: Camry
+        niceName:
+          type: string
+          description: URL-friendly model name
+          example: camry
+    ModelYear:
+      type: object
+      description: A specific model year with available styles
+      properties:
+        id:
+          type: integer
+          description: Model year ID
+          example: 100538647
+        year:
+          type: integer
+          description: Model year (4-digit)
+          example: 2025
+        states:
+          type: array
+          description: 'Availability states: new, used, future'
+          items:
+            type: string
+        styles:
+          type: array
+          description: Available trim styles for this year
+          items:
+            $ref: '#/components/schemas/StyleSummary'
+    MakeSummary:
+      type: object
+      description: Summary representation of a vehicle make
+      properties:
+        id:
+          type: integer
+          example: 200001444
+        name:
+          type: string
+          example: Toyota
+        niceName:
+          type: string
+          example: toyota
+    StylePrice:
+      type: object
+      description: Pricing information for a vehicle style
+      properties:
+        baseMSRP:
+          type: number
+          description: Manufacturer Suggested Retail Price
+          example: 27515
+        baseInvoice:
+          type: number
+          description: Dealer invoice price
+          example: 25940
+        tmv:
+          type: number
+          description: True Market Value estimate
+          example: 26800
+        destinationCharge:
+          type: number
+          description: Destination and delivery charge
+          example: 1095
+    StyleSummary:
+      type: object
+      description: Summary of a vehicle style (trim)
+      properties:
+        id:
+          type: integer
+          description: Style ID
+          example: 401890697
+        name:
+          type: string
+          description: Full style name (trim + body style)
+          example: LE 4dr Sedan
+        submodel:
+          type: object
+          properties:
+            body:
+              type: string
+              example: Sedan
+            fuel:
+              type: string
+              example: Gas
+            tuner:
+              type: string
+              example: Standard
+    Style:
+      type: object
+      description: Complete vehicle style (trim) with specs, options, and pricing
+      properties:
+        id:
+          type: integer
+          description: Style ID
+          example: 401890697
+        name:
+          type: string
+          description: Full style name
+          example: LE 4dr Sedan
+        year:
+          $ref: '#/components/schemas/ModelYear'
+        make:
+          $ref: '#/components/schemas/MakeSummary'
+        model:
+          $ref: '#/components/schemas/ModelSummary'
+        price:
+          $ref: '#/components/schemas/StylePrice'
+        squishVins:
+          type: array
+          description: VIN squish codes for this style
+          items:
+            type: string
+        categories:
+          type: object
+          description: Vehicle category classifications
+          properties:
+            primaryBodyType:
+              type: string
+              example: Cars
+            vehicleStyle:
+              type: string
+              example: Sedan
+            vehicleType:
+              type: string
+              example: Car
+            market:
+              type: string
+              example: Mainstream
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Edmunds API key obtained from developer.edmunds.com

@@ -1,0 +1,139 @@
+openapi: 3.1.0
+info:
+  title: Vehicle API (Edmunds) Inventory Makes API
+  description: The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.
+  version: '2.0'
+  contact:
+    name: Edmunds Developer Support
+    url: https://developer.edmunds.com/support/
+  license:
+    name: Edmunds API Terms of Service
+    url: https://developer.edmunds.com/terms/
+  x-generated-from: documentation
+servers:
+- url: https://api.edmunds.com/api
+  description: Edmunds API
+security:
+- ApiKey: []
+tags:
+- name: Makes
+  description: Vehicle manufacturer make data
+paths:
+  /vehicle/v2/makes:
+    get:
+      operationId: listMakes
+      summary: Vehicle API List Makes
+      description: Returns a list of all vehicle makes (manufacturers). Supports filtering by publication state, vehicle type, and year. Returns make ID, name, nice name (URL-friendly slug), and model count.
+      tags:
+      - Makes
+      parameters:
+      - name: state
+        in: query
+        description: 'Publication state filter: new, used, or future'
+        schema:
+          type: string
+          enum:
+          - new
+          - used
+          - future
+      - name: year
+        in: query
+        description: Filter by model year (4-digit year)
+        schema:
+          type: integer
+          example: 2025
+      - name: view
+        in: query
+        description: 'Response detail level: basic or full'
+        schema:
+          type: string
+          enum:
+          - basic
+          - full
+          default: basic
+      - name: api_key
+        in: query
+        required: true
+        description: Edmunds API key
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of vehicle makes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MakeListResponse'
+              examples:
+                ListMakes200Example:
+                  summary: Default listMakes 200 response
+                  x-microcks-default: true
+                  value:
+                    makes:
+                    - id: 200001444
+                      name: Toyota
+                      niceName: toyota
+                      models:
+                      - id: Toyota_Camry
+                        name: Camry
+                        niceName: camry
+                    makesCount: 1
+        '401':
+          description: Invalid API key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    MakeListResponse:
+      type: object
+      properties:
+        makes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Make'
+        makesCount:
+          type: integer
+    ModelSummary:
+      type: object
+      description: Summary representation of a vehicle model
+      properties:
+        id:
+          type: string
+          description: Model identifier (Make_Model format)
+          example: Toyota_Camry
+        name:
+          type: string
+          description: Model display name
+          example: Camry
+        niceName:
+          type: string
+          description: URL-friendly model name
+          example: camry
+    Make:
+      type: object
+      description: Vehicle manufacturer make
+      properties:
+        id:
+          type: integer
+          description: Unique make ID
+          example: 200001444
+        name:
+          type: string
+          description: Make display name
+          example: Toyota
+        niceName:
+          type: string
+          description: URL-friendly make name (slug)
+          example: toyota
+        models:
+          type: array
+          description: Models for this make (in full view)
+          items:
+            $ref: '#/components/schemas/ModelSummary'
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Edmunds API key obtained from developer.edmunds.com

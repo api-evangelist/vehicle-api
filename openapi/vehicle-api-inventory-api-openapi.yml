@@ -1,0 +1,181 @@
+openapi: 3.1.0
+info:
+  title: Vehicle API (Edmunds) Inventory API
+  description: The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.
+  version: '2.0'
+  contact:
+    name: Edmunds Developer Support
+    url: https://developer.edmunds.com/support/
+  license:
+    name: Edmunds API Terms of Service
+    url: https://developer.edmunds.com/terms/
+  x-generated-from: documentation
+servers:
+- url: https://api.edmunds.com/api
+  description: Edmunds API
+security:
+- ApiKey: []
+tags:
+- name: Inventory
+  description: Dealer vehicle inventory
+paths:
+  /vehicle/v2/inventory:
+    get:
+      operationId: searchInventory
+      summary: Vehicle API Search Inventory
+      description: Search dealer inventory for vehicles matching make, model, year, and geographic criteria. Returns a list of matching vehicles with dealer information, pricing, and listing details.
+      tags:
+      - Inventory
+      parameters:
+      - name: make
+        in: query
+        required: true
+        description: Vehicle make nice name (e.g. toyota)
+        schema:
+          type: string
+        example: toyota
+      - name: model
+        in: query
+        required: true
+        description: Vehicle model nice name (e.g. camry)
+        schema:
+          type: string
+        example: camry
+      - name: year
+        in: query
+        description: Model year filter
+        schema:
+          type: integer
+        example: 2025
+      - name: zip
+        in: query
+        required: true
+        description: 5-digit ZIP code for dealer search
+        schema:
+          type: string
+        example: '90210'
+      - name: radius
+        in: query
+        description: Search radius in miles (default 50)
+        schema:
+          type: integer
+          default: 50
+      - name: pageSize
+        in: query
+        description: Results per page (max 100)
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+      - name: pageNum
+        in: query
+        description: Page number (1-based)
+        schema:
+          type: integer
+          default: 1
+      - name: api_key
+        in: query
+        required: true
+        description: Edmunds API key
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Inventory search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryResponse'
+              examples:
+                SearchInventory200Example:
+                  summary: Default searchInventory 200 response
+                  x-microcks-default: true
+                  value:
+                    inventories:
+                    - vin: 4T1C11AK0SU123456
+                      type: new
+                      make: toyota
+                      model: camry
+                      year: 2025
+                      styleId: 401890697
+                      trim: LE
+                      price: 27515
+                      dealerPrice: 26800
+                      dealerId: 12345
+                      zip: '90210'
+                    totalCount: 1
+        '400':
+          description: Missing required parameters
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    InventoryResponse:
+      type: object
+      properties:
+        inventories:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryItem'
+        totalCount:
+          type: integer
+        pageSize:
+          type: integer
+        pageNum:
+          type: integer
+    InventoryItem:
+      type: object
+      description: A vehicle in dealer inventory
+      properties:
+        vin:
+          type: string
+          description: 17-character Vehicle Identification Number
+          example: 4T1C11AK0SU123456
+        type:
+          type: string
+          description: New or used
+          enum:
+          - new
+          - used
+          - cpo
+          example: new
+        make:
+          type: string
+          example: toyota
+        model:
+          type: string
+          example: camry
+        year:
+          type: integer
+          example: 2025
+        styleId:
+          type: integer
+          example: 401890697
+        trim:
+          type: string
+          example: LE
+        price:
+          type: number
+          description: Asking price
+          example: 27515
+        dealerPrice:
+          type: number
+          description: Edmunds estimated dealer price
+          example: 26800
+        dealerId:
+          type: integer
+          example: 12345
+        zip:
+          type: string
+          example: '90210'
+        mileage:
+          type: integer
+          description: Odometer reading (for used vehicles)
+          example: 0
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Edmunds API key obtained from developer.edmunds.com

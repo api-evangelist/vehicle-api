@@ -1,0 +1,138 @@
+openapi: 3.1.0
+info:
+  title: Vehicle API (Edmunds) Inventory Pricing API
+  description: The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.
+  version: '2.0'
+  contact:
+    name: Edmunds Developer Support
+    url: https://developer.edmunds.com/support/
+  license:
+    name: Edmunds API Terms of Service
+    url: https://developer.edmunds.com/terms/
+  x-generated-from: documentation
+servers:
+- url: https://api.edmunds.com/api
+  description: Edmunds API
+security:
+- ApiKey: []
+tags:
+- name: Pricing
+  description: True Market Value pricing data
+paths:
+  /vehicle/v2/price/tmv/simple:
+    get:
+      operationId: getTMVPrice
+      summary: Vehicle API Get TMV Price
+      description: Returns True Market Value (TMV) pricing for a vehicle style. TMV is Edmunds' estimate of what consumers are actually paying for a vehicle in a given area. Supports new and used vehicle pricing with zip code localization.
+      tags:
+      - Pricing
+      parameters:
+      - name: styleId
+        in: query
+        required: true
+        description: Edmunds style ID
+        schema:
+          type: integer
+        example: 401890697
+      - name: zip
+        in: query
+        required: true
+        description: 5-digit US ZIP code for regional pricing
+        schema:
+          type: string
+          pattern: ^\d{5}$
+        example: '90210'
+      - name: state
+        in: query
+        description: 'Vehicle condition: new or used'
+        schema:
+          type: string
+          enum:
+          - new
+          - used
+          default: new
+      - name: mileage
+        in: query
+        description: Mileage for used vehicle valuation
+        schema:
+          type: integer
+      - name: condition
+        in: query
+        description: 'Used vehicle condition: Outstanding, Clean, Average, Rough'
+        schema:
+          type: string
+          enum:
+          - Outstanding
+          - Clean
+          - Average
+          - Rough
+      - name: api_key
+        in: query
+        required: true
+        description: Edmunds API key
+        schema:
+          type: string
+      responses:
+        '200':
+          description: TMV pricing data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceResponse'
+              examples:
+                GetTMVPrice200Example:
+                  summary: Default getTMVPrice 200 response
+                  x-microcks-default: true
+                  value:
+                    styleId: 401890697
+                    zip: '90210'
+                    tmvPrice:
+                      baseMSRP: 27515
+                      baseInvoice: 25940
+                      tmv: 26800
+                      destinationCharge: 1095
+        '404':
+          description: Style not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    StylePrice:
+      type: object
+      description: Pricing information for a vehicle style
+      properties:
+        baseMSRP:
+          type: number
+          description: Manufacturer Suggested Retail Price
+          example: 27515
+        baseInvoice:
+          type: number
+          description: Dealer invoice price
+          example: 25940
+        tmv:
+          type: number
+          description: True Market Value estimate
+          example: 26800
+        destinationCharge:
+          type: number
+          description: Destination and delivery charge
+          example: 1095
+    PriceResponse:
+      type: object
+      description: TMV pricing response for a vehicle style
+      properties:
+        styleId:
+          type: integer
+          example: 401890697
+        zip:
+          type: string
+          example: '90210'
+        tmvPrice:
+          $ref: '#/components/schemas/StylePrice'
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Edmunds API key obtained from developer.edmunds.com

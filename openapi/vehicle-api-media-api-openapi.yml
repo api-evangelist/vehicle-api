@@ -1,0 +1,121 @@
+openapi: 3.1.0
+info:
+  title: Vehicle API (Edmunds) Inventory Media API
+  description: The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.
+  version: '2.0'
+  contact:
+    name: Edmunds Developer Support
+    url: https://developer.edmunds.com/support/
+  license:
+    name: Edmunds API Terms of Service
+    url: https://developer.edmunds.com/terms/
+  x-generated-from: documentation
+servers:
+- url: https://api.edmunds.com/api
+  description: Edmunds API
+security:
+- ApiKey: []
+tags:
+- name: Media
+  description: Vehicle photos and videos
+paths:
+  /vehicle/v2/media/{styleId}/photos:
+    get:
+      operationId: getStylePhotos
+      summary: Vehicle API Get Style Photos
+      description: Returns photo assets for a specific vehicle style, including exterior, interior, and color swatch images with multiple sizes. Photos are available via the Edmunds CDN.
+      tags:
+      - Media
+      parameters:
+      - name: styleId
+        in: path
+        required: true
+        description: Edmunds style ID
+        schema:
+          type: integer
+        example: 401890697
+      - name: api_key
+        in: query
+        required: true
+        description: Edmunds API key
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Vehicle photos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoListResponse'
+              examples:
+                GetStylePhotos200Example:
+                  summary: Default getStylePhotos 200 response
+                  x-microcks-default: true
+                  value:
+                    photos:
+                    - id: toyota_camry_2025_le_001
+                      title: Toyota Camry 2025 LE Front 3/4
+                      category: exterior
+                      tags:
+                      - front 3/4
+                      - exterior
+                      sizes:
+                      - size: 98x65
+                        link: https://media.ed.edmunds-media.com/toyota/camry/2025/oem/2025_toyota_camry_sedan_le_fq_oem_1_98.jpg
+        '404':
+          description: Style not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Photo:
+      type: object
+      description: Vehicle photo asset with multiple size variants
+      properties:
+        id:
+          type: string
+          description: Photo identifier
+          example: toyota_camry_2025_le_001
+        title:
+          type: string
+          description: Photo description
+          example: Toyota Camry 2025 LE Front 3/4
+        category:
+          type: string
+          description: 'Photo category: exterior, interior, color'
+          example: exterior
+        tags:
+          type: array
+          items:
+            type: string
+          example:
+          - front 3/4
+          - exterior
+        sizes:
+          type: array
+          description: Available image sizes with URLs
+          items:
+            type: object
+            properties:
+              size:
+                type: string
+                example: 98x65
+              link:
+                type: string
+                format: uri
+    PhotoListResponse:
+      type: object
+      properties:
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        photosCount:
+          type: integer
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Edmunds API key obtained from developer.edmunds.com
