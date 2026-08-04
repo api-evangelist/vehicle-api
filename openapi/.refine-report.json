@@ -1,0 +1,26 @@
+{
+  "provider": "vehicle-api",
+  "sources": [
+    "vehicle-api-inventory-api-openapi.yml",
+    "vehicle-api-makes-api-openapi.yml",
+    "vehicle-api-media-api-openapi.yml",
+    "vehicle-api-models-api-openapi.yml",
+    "vehicle-api-pricing-api-openapi.yml",
+    "vehicle-api-specs-api-openapi.yml",
+    "vehicle-api-styles-api-openapi.yml"
+  ],
+  "outputs": [
+    "vehicle-api-inventory-api-openapi.yml",
+    "vehicle-api-makes-api-openapi.yml",
+    "vehicle-api-media-api-openapi.yml",
+    "vehicle-api-models-api-openapi.yml",
+    "vehicle-api-pricing-api-openapi.yml",
+    "vehicle-api-specs-api-openapi.yml",
+    "vehicle-api-styles-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
