@@ -55,8 +55,6 @@ apis:
     url: json-schema/vehicle-api-model-schema.json
   - type: JSONSchema
     url: json-schema/vehicle-api-style-schema.json
-  - type: JSONSchema
-    url: json-schema/vehicle-api-price-schema.json
   - type: JSONStructure
     url: json-structure/vehicle-api-make-structure.json
   - type: JSONStructure
@@ -88,8 +86,6 @@ apis:
     url: json-schema/vehicle-api-model-schema.json
   - type: JSONSchema
     url: json-schema/vehicle-api-style-schema.json
-  - type: JSONSchema
-    url: json-schema/vehicle-api-price-schema.json
   - type: JSONStructure
     url: json-structure/vehicle-api-make-structure.json
   - type: JSONStructure
@@ -121,8 +117,6 @@ apis:
     url: json-schema/vehicle-api-model-schema.json
   - type: JSONSchema
     url: json-schema/vehicle-api-style-schema.json
-  - type: JSONSchema
-    url: json-schema/vehicle-api-price-schema.json
   - type: JSONStructure
     url: json-structure/vehicle-api-make-structure.json
   - type: JSONStructure
@@ -154,8 +148,6 @@ apis:
     url: json-schema/vehicle-api-model-schema.json
   - type: JSONSchema
     url: json-schema/vehicle-api-style-schema.json
-  - type: JSONSchema
-    url: json-schema/vehicle-api-price-schema.json
   - type: JSONStructure
     url: json-structure/vehicle-api-make-structure.json
   - type: JSONStructure
@@ -187,8 +179,6 @@ apis:
     url: json-schema/vehicle-api-model-schema.json
   - type: JSONSchema
     url: json-schema/vehicle-api-style-schema.json
-  - type: JSONSchema
-    url: json-schema/vehicle-api-price-schema.json
   - type: JSONStructure
     url: json-structure/vehicle-api-make-structure.json
   - type: JSONStructure
@@ -220,8 +210,6 @@ apis:
     url: json-schema/vehicle-api-model-schema.json
   - type: JSONSchema
     url: json-schema/vehicle-api-style-schema.json
-  - type: JSONSchema
-    url: json-schema/vehicle-api-price-schema.json
   - type: JSONStructure
     url: json-structure/vehicle-api-make-structure.json
   - type: JSONStructure
@@ -253,8 +241,6 @@ apis:
     url: json-schema/vehicle-api-model-schema.json
   - type: JSONSchema
     url: json-schema/vehicle-api-style-schema.json
-  - type: JSONSchema
-    url: json-schema/vehicle-api-price-schema.json
   - type: JSONStructure
     url: json-structure/vehicle-api-make-structure.json
   - type: JSONStructure
