@@ -1,0 +1,237 @@
+{
+  "item": [
+    {
+      "id": "39d7e3fd-0ec3-4d56-ad4d-7703704c833f",
+      "name": "Models",
+      "description": {
+        "content": "Vehicle model information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a192879f-ec6b-4dd3-b857-da585b4fe1ed",
+          "name": "Vehicle API List Models",
+          "request": {
+            "name": "Vehicle API List Models",
+            "description": {
+              "content": "Returns all models for a given vehicle make. Supports filtering by publication state and year. Returns model ID, name, nice name, and the parent make.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicle",
+                "v2",
+                "makes",
+                ":makeNiceName",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Publication state: new, used, or future"
+                },
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>",
+                  "description": "Filter by model year"
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Edmunds API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "makeNiceName",
+                  "description": "(Required) URL-friendly make name (e.g. toyota, ford, chevrolet)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e74e717f-05e4-45c0-8341-ac0cae591d4d",
+              "name": "List of vehicle models for the make",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "makes",
+                    ":makeNiceName",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "year",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "makeNiceName",
+                      "description": "(Required) URL-friendly make name (e.g. toyota, ford, chevrolet)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"models\": [\n    {\n      \"id\": \"Toyota_Camry\",\n      \"name\": \"Camry\",\n      \"niceName\": \"camry\",\n      \"make\": {\n        \"id\": 200001444,\n        \"name\": \"Toyota\",\n        \"niceName\": \"toyota\"\n      }\n    }\n  ],\n  \"modelsCount\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b30b1ea-ef78-49a4-9520-66124b9059a1",
+              "name": "Make not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "makes",
+                    ":makeNiceName",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "year",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "makeNiceName",
+                      "description": "(Required) URL-friendly make name (e.g. toyota, ford, chevrolet)"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edmunds.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c7c3ea5b-4454-4a4f-82f6-7ce2a74f5200",
+    "name": "Vehicle API (Edmunds) Inventory Models API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.\n\nContact Support:\n Name: Edmunds Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

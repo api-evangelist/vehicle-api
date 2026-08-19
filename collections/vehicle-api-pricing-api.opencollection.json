@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vehicle API (Edmunds) Inventory Pricing API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pricing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle API Get TMV Price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/price/tmv/simple",
+            "params": [
+              {
+                "name": "styleId",
+                "value": "401890697",
+                "type": "query",
+                "description": "Edmunds style ID"
+              },
+              {
+                "name": "zip",
+                "value": "90210",
+                "type": "query",
+                "description": "5-digit US ZIP code for regional pricing"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle condition: new or used"
+              },
+              {
+                "name": "mileage",
+                "value": "",
+                "type": "query",
+                "description": "Mileage for used vehicle valuation"
+              },
+              {
+                "name": "condition",
+                "value": "",
+                "type": "query",
+                "description": "Used vehicle condition: Outstanding, Clean, Average, Rough"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Returns True Market Value (TMV) pricing for a vehicle style. TMV is Edmunds' estimate of what consumers are actually paying for a vehicle in a given area. Supports new and used vehicle pricing with zip code localization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,255 @@
+{
+  "item": [
+    {
+      "id": "af5cadb3-dd0b-4cb0-902a-7ec45d9705b0",
+      "name": "Pricing",
+      "description": {
+        "content": "True Market Value pricing data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1e6f2d0b-7b6e-4a9c-b80b-82c0755283d8",
+          "name": "Vehicle API Get TMV Price",
+          "request": {
+            "name": "Vehicle API Get TMV Price",
+            "description": {
+              "content": "Returns True Market Value (TMV) pricing for a vehicle style. TMV is Edmunds' estimate of what consumers are actually paying for a vehicle in a given area. Supports new and used vehicle pricing with zip code localization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicle",
+                "v2",
+                "price",
+                "tmv",
+                "simple"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "styleId",
+                  "value": "<integer>",
+                  "description": "(Required) Edmunds style ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "zip",
+                  "value": "<string>",
+                  "description": "(Required) 5-digit US ZIP code for regional pricing"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "new",
+                  "description": "Vehicle condition: new or used"
+                },
+                {
+                  "disabled": false,
+                  "key": "mileage",
+                  "value": "<integer>",
+                  "description": "Mileage for used vehicle valuation"
+                },
+                {
+                  "disabled": false,
+                  "key": "condition",
+                  "value": "<string>",
+                  "description": "Used vehicle condition: Outstanding, Clean, Average, Rough"
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Edmunds API key"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2466183e-c6d0-4125-8984-03adf1f4a8c2",
+              "name": "TMV pricing data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "price",
+                    "tmv",
+                    "simple"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "styleId",
+                      "value": "401890697"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "90210"
+                    },
+                    {
+                      "key": "state",
+                      "value": "new"
+                    },
+                    {
+                      "key": "mileage",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "condition",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"styleId\": 401890697,\n  \"zip\": \"90210\",\n  \"tmvPrice\": {\n    \"baseMSRP\": 27515,\n    \"baseInvoice\": 25940,\n    \"tmv\": 26800,\n    \"destinationCharge\": 1095\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd9e7de9-eab7-45f6-ae1a-4540aa8bbdb6",
+              "name": "Style not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "price",
+                    "tmv",
+                    "simple"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "styleId",
+                      "value": "401890697"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "90210"
+                    },
+                    {
+                      "key": "state",
+                      "value": "new"
+                    },
+                    {
+                      "key": "mileage",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "condition",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edmunds.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f8522324-7c30-4e65-9c90-eba4b7f506db",
+    "name": "Vehicle API (Edmunds) Inventory Pricing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.\n\nContact Support:\n Name: Edmunds Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

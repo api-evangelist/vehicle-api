@@ -1,0 +1,221 @@
+{
+  "item": [
+    {
+      "id": "ea3df387-8fee-49f2-ad48-1de082e919ef",
+      "name": "Makes",
+      "description": {
+        "content": "Vehicle manufacturer make data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c24a0120-3be9-4f1c-aebb-58d9b5b2e532",
+          "name": "Vehicle API List Makes",
+          "request": {
+            "name": "Vehicle API List Makes",
+            "description": {
+              "content": "Returns a list of all vehicle makes (manufacturers). Supports filtering by publication state, vehicle type, and year. Returns make ID, name, nice name (URL-friendly slug), and model count.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicle",
+                "v2",
+                "makes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Publication state filter: new, used, or future"
+                },
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>",
+                  "description": "Filter by model year (4-digit year)"
+                },
+                {
+                  "disabled": false,
+                  "key": "view",
+                  "value": "basic",
+                  "description": "Response detail level: basic or full"
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Edmunds API key"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "514c9c79-c0d1-4a54-9eec-bc9e3dae7a09",
+              "name": "List of vehicle makes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "makes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2025"
+                    },
+                    {
+                      "key": "view",
+                      "value": "basic"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"makes\": [\n    {\n      \"id\": 200001444,\n      \"name\": \"Toyota\",\n      \"niceName\": \"toyota\",\n      \"models\": [\n        {\n          \"id\": \"Toyota_Camry\",\n          \"name\": \"Camry\",\n          \"niceName\": \"camry\"\n        }\n      ]\n    }\n  ],\n  \"makesCount\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54e033bb-1890-40a1-b89f-759fa0aae264",
+              "name": "Invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "makes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2025"
+                    },
+                    {
+                      "key": "view",
+                      "value": "basic"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edmunds.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "890aedbb-a1ef-4f6b-932d-a5b37bd9ebc3",
+    "name": "Vehicle API (Edmunds) Inventory Makes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.\n\nContact Support:\n Name: Edmunds Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

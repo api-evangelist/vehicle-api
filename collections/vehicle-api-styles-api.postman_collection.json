@@ -1,0 +1,407 @@
+{
+  "item": [
+    {
+      "id": "20a6b793-23c5-4158-920f-61bc29a64e97",
+      "name": "Styles",
+      "description": {
+        "content": "Vehicle trim and style configurations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2cea3321-d756-4b13-bdcd-c67a8f39411e",
+          "name": "Vehicle API List Model Years",
+          "request": {
+            "name": "Vehicle API List Model Years",
+            "description": {
+              "content": "Returns all available model years for a specific make and model. Includes publication state and the list of styles (trims) for each year.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicle",
+                "v2",
+                "makes",
+                ":makeNiceName",
+                "models",
+                ":modelNiceName",
+                "years"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Edmunds API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "makeNiceName",
+                  "description": "(Required) URL-friendly make name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "modelNiceName",
+                  "description": "(Required) URL-friendly model name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "94a19b80-cc42-442f-9b99-aca41aaeb1e4",
+              "name": "List of model years with styles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "makes",
+                    ":makeNiceName",
+                    "models",
+                    ":modelNiceName",
+                    "years"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "makeNiceName",
+                      "description": "(Required) URL-friendly make name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelNiceName",
+                      "description": "(Required) URL-friendly model name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"years\": [\n    {\n      \"id\": 100538647,\n      \"year\": 2025,\n      \"states\": [\n        \"new\"\n      ],\n      \"styles\": [\n        {\n          \"id\": 401890697,\n          \"name\": \"LE 4dr Sedan\",\n          \"submodel\": {\n            \"body\": \"Sedan\",\n            \"fuel\": \"Gas\",\n            \"tuner\": \"Standard\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8d6e13d-8768-4aab-92e1-7efdae22f9db",
+              "name": "Make or model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "makes",
+                    ":makeNiceName",
+                    "models",
+                    ":modelNiceName",
+                    "years"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "makeNiceName",
+                      "description": "(Required) URL-friendly make name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelNiceName",
+                      "description": "(Required) URL-friendly model name"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf8119b4-88be-489f-85a3-08c538d8e569",
+          "name": "Vehicle API Get Style",
+          "request": {
+            "name": "Vehicle API Get Style",
+            "description": {
+              "content": "Returns complete details for a specific vehicle style (trim), including specifications, options, standard equipment, colors, and pricing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicle",
+                "v2",
+                "styles",
+                ":styleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "view",
+                  "value": "basic",
+                  "description": "Response detail level: basic or full"
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Edmunds API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "styleId",
+                  "description": "(Required) Edmunds style ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6e8ee0c-133e-4870-a4b2-f794c82d19e1",
+              "name": "Vehicle style details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "styles",
+                    ":styleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "view",
+                      "value": "basic"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "styleId",
+                      "description": "(Required) Edmunds style ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 401890697,\n  \"name\": \"LE 4dr Sedan\",\n  \"year\": {\n    \"id\": 100538647,\n    \"year\": 2025\n  },\n  \"make\": {\n    \"id\": 200001444,\n    \"name\": \"Toyota\",\n    \"niceName\": \"toyota\"\n  },\n  \"model\": {\n    \"id\": \"Toyota_Camry\",\n    \"name\": \"Camry\",\n    \"niceName\": \"camry\"\n  },\n  \"price\": {\n    \"baseMSRP\": 27515,\n    \"baseInvoice\": 25940,\n    \"tmv\": 26800\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3463466f-d05f-4e11-88aa-73ccd67e6043",
+              "name": "Style not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "styles",
+                    ":styleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "view",
+                      "value": "basic"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "styleId",
+                      "description": "(Required) Edmunds style ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edmunds.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7f696757-4136-458a-9368-0ea0da38436f",
+    "name": "Vehicle API (Edmunds) Inventory Styles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.\n\nContact Support:\n Name: Edmunds Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

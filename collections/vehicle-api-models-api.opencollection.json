@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vehicle API (Edmunds) Inventory Models API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle API List Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/makes/:makeNiceName/models",
+            "params": [
+              {
+                "name": "makeNiceName",
+                "value": "toyota",
+                "type": "path",
+                "description": "URL-friendly make name (e.g. toyota, ford, chevrolet)"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Publication state: new, used, or future"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Filter by model year"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Returns all models for a given vehicle make. Supports filtering by publication state and year. Returns model ID, name, nice name, and the parent make."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

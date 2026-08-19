@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vehicle API (Edmunds) Inventory Makes API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Makes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle API List Makes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/makes",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Publication state filter: new, used, or future"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Filter by model year (4-digit year)"
+              },
+              {
+                "name": "view",
+                "value": "",
+                "type": "query",
+                "description": "Response detail level: basic or full"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Returns a list of all vehicle makes (manufacturers). Supports filtering by publication state, vehicle type, and year. Returns make ID, name, nice name (URL-friendly slug), and model count."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,209 @@
+{
+  "item": [
+    {
+      "id": "54bab9c2-2665-435b-be49-49b1b65f5a61",
+      "name": "Media",
+      "description": {
+        "content": "Vehicle photos and videos",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d2739342-fb31-41c0-8b1b-4adb2bfea065",
+          "name": "Vehicle API Get Style Photos",
+          "request": {
+            "name": "Vehicle API Get Style Photos",
+            "description": {
+              "content": "Returns photo assets for a specific vehicle style, including exterior, interior, and color swatch images with multiple sizes. Photos are available via the Edmunds CDN.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicle",
+                "v2",
+                "media",
+                ":styleId",
+                "photos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Edmunds API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "styleId",
+                  "description": "(Required) Edmunds style ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "062ea5ec-8aa2-4ec6-b436-0c75cc1defb9",
+              "name": "Vehicle photos",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "media",
+                    ":styleId",
+                    "photos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "styleId",
+                      "description": "(Required) Edmunds style ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"photos\": [\n    {\n      \"id\": \"toyota_camry_2025_le_001\",\n      \"title\": \"Toyota Camry 2025 LE Front 3/4\",\n      \"category\": \"exterior\",\n      \"tags\": [\n        \"front 3/4\",\n        \"exterior\"\n      ],\n      \"sizes\": [\n        {\n          \"size\": \"98x65\",\n          \"link\": \"https://media.ed.edmunds-media.com/toyota/camry/2025/oem/2025_toyota_camry_sedan_le_fq_oem_1_98.jpg\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "003dea04-fff0-4f69-8784-0246c214ba9d",
+              "name": "Style not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "media",
+                    ":styleId",
+                    "photos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "styleId",
+                      "description": "(Required) Edmunds style ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edmunds.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "46a14467-d582-4fd3-a39d-a3b8b700d8b7",
+    "name": "Vehicle API (Edmunds) Inventory Media API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.\n\nContact Support:\n Name: Edmunds Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

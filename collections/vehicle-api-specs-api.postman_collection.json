@@ -1,0 +1,220 @@
+{
+  "item": [
+    {
+      "id": "c96f7bcd-87fa-4064-b47a-1f0559eb525e",
+      "name": "Specs",
+      "description": {
+        "content": "Vehicle technical specifications",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f4e4137a-e48e-4e8c-a07b-4350b9d05f5f",
+          "name": "Vehicle API Get Style",
+          "request": {
+            "name": "Vehicle API Get Style",
+            "description": {
+              "content": "Returns complete details for a specific vehicle style (trim), including specifications, options, standard equipment, colors, and pricing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicle",
+                "v2",
+                "styles",
+                ":styleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "view",
+                  "value": "basic",
+                  "description": "Response detail level: basic or full"
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Edmunds API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "styleId",
+                  "description": "(Required) Edmunds style ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1898a405-a3eb-4296-bb8a-aea374f7551e",
+              "name": "Vehicle style details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "styles",
+                    ":styleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "view",
+                      "value": "basic"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "styleId",
+                      "description": "(Required) Edmunds style ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 401890697,\n  \"name\": \"LE 4dr Sedan\",\n  \"year\": {\n    \"id\": 100538647,\n    \"year\": 2025\n  },\n  \"make\": {\n    \"id\": 200001444,\n    \"name\": \"Toyota\",\n    \"niceName\": \"toyota\"\n  },\n  \"model\": {\n    \"id\": \"Toyota_Camry\",\n    \"name\": \"Camry\",\n    \"niceName\": \"camry\"\n  },\n  \"price\": {\n    \"baseMSRP\": 27515,\n    \"baseInvoice\": 25940,\n    \"tmv\": 26800\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71b6b548-5a04-448e-a3d0-75186a2f779d",
+              "name": "Style not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicle",
+                    "v2",
+                    "styles",
+                    ":styleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "view",
+                      "value": "basic"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "styleId",
+                      "description": "(Required) Edmunds style ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edmunds.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8fd0ac7b-72dd-4dd8-810f-3653aaeccdd7",
+    "name": "Vehicle API (Edmunds) Inventory Specs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.\n\nContact Support:\n Name: Edmunds Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

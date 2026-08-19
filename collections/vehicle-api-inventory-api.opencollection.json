@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vehicle API (Edmunds) Inventory API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle API Search Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/inventory",
+            "params": [
+              {
+                "name": "make",
+                "value": "toyota",
+                "type": "query",
+                "description": "Vehicle make nice name (e.g. toyota)"
+              },
+              {
+                "name": "model",
+                "value": "camry",
+                "type": "query",
+                "description": "Vehicle model nice name (e.g. camry)"
+              },
+              {
+                "name": "year",
+                "value": "2025",
+                "type": "query",
+                "description": "Model year filter"
+              },
+              {
+                "name": "zip",
+                "value": "90210",
+                "type": "query",
+                "description": "5-digit ZIP code for dealer search"
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Search radius in miles (default 50)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Results per page (max 100)"
+              },
+              {
+                "name": "pageNum",
+                "value": "",
+                "type": "query",
+                "description": "Page number (1-based)"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Search dealer inventory for vehicles matching make, model, year, and geographic criteria. Returns a list of matching vehicles with dealer information, pricing, and listing details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

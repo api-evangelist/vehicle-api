@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vehicle API (Edmunds) Inventory Media API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Media",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle API Get Style Photos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/media/:styleId/photos",
+            "params": [
+              {
+                "name": "styleId",
+                "value": "401890697",
+                "type": "path",
+                "description": "Edmunds style ID"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Returns photo assets for a specific vehicle style, including exterior, interior, and color swatch images with multiple sizes. Photos are available via the Edmunds CDN."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

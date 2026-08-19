@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vehicle API (Edmunds) Inventory Styles API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Styles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle API List Model Years",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/makes/:makeNiceName/models/:modelNiceName/years",
+            "params": [
+              {
+                "name": "makeNiceName",
+                "value": "toyota",
+                "type": "path",
+                "description": "URL-friendly make name"
+              },
+              {
+                "name": "modelNiceName",
+                "value": "camry",
+                "type": "path",
+                "description": "URL-friendly model name"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Returns all available model years for a specific make and model. Includes publication state and the list of styles (trims) for each year."
+        },
+        {
+          "info": {
+            "name": "Vehicle API Get Style",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edmunds.com/api/vehicle/v2/styles/:styleId",
+            "params": [
+              {
+                "name": "styleId",
+                "value": "401890697",
+                "type": "path",
+                "description": "Edmunds style ID"
+              },
+              {
+                "name": "view",
+                "value": "",
+                "type": "query",
+                "description": "Response detail level: basic or full"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Edmunds API key"
+              }
+            ]
+          },
+          "docs": "Returns complete details for a specific vehicle style (trim), including specifications, options, standard equipment, colors, and pricing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
