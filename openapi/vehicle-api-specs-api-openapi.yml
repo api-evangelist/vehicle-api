@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Vehicle API (Edmunds) Inventory Specs API
   description: The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.
@@ -85,22 +85,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ModelSummary:
-      type: object
-      description: Summary representation of a vehicle model
-      properties:
-        id:
-          type: string
-          description: Model identifier (Make_Model format)
-          example: Toyota_Camry
-        name:
-          type: string
-          description: Model display name
-          example: Camry
-        niceName:
-          type: string
-          description: URL-friendly model name
-          example: camry
     ModelYear:
       type: object
       description: A specific model year with available styles
@@ -123,19 +107,22 @@ components:
           description: Available trim styles for this year
           items:
             $ref: '#/components/schemas/StyleSummary'
-    MakeSummary:
+    ModelSummary:
       type: object
-      description: Summary representation of a vehicle make
+      description: Summary representation of a vehicle model
       properties:
         id:
-          type: integer
-          example: 200001444
+          type: string
+          description: Model identifier (Make_Model format)
+          example: Toyota_Camry
         name:
           type: string
-          example: Toyota
+          description: Model display name
+          example: Camry
         niceName:
           type: string
-          example: toyota
+          description: URL-friendly model name
+          example: camry
     StylePrice:
       type: object
       description: Pricing information for a vehicle style
@@ -156,30 +143,6 @@ components:
           type: number
           description: Destination and delivery charge
           example: 1095
-    StyleSummary:
-      type: object
-      description: Summary of a vehicle style (trim)
-      properties:
-        id:
-          type: integer
-          description: Style ID
-          example: 401890697
-        name:
-          type: string
-          description: Full style name (trim + body style)
-          example: LE 4dr Sedan
-        submodel:
-          type: object
-          properties:
-            body:
-              type: string
-              example: Sedan
-            fuel:
-              type: string
-              example: Gas
-            tuner:
-              type: string
-              example: Standard
     Style:
       type: object
       description: Complete vehicle style (trim) with specs, options, and pricing
@@ -221,6 +184,43 @@ components:
             market:
               type: string
               example: Mainstream
+    MakeSummary:
+      type: object
+      description: Summary representation of a vehicle make
+      properties:
+        id:
+          type: integer
+          example: 200001444
+        name:
+          type: string
+          example: Toyota
+        niceName:
+          type: string
+          example: toyota
+    StyleSummary:
+      type: object
+      description: Summary of a vehicle style (trim)
+      properties:
+        id:
+          type: integer
+          description: Style ID
+          example: 401890697
+        name:
+          type: string
+          description: Full style name (trim + body style)
+          example: LE 4dr Sedan
+        submodel:
+          type: object
+          properties:
+            body:
+              type: string
+              example: Sedan
+            fuel:
+              type: string
+              example: Gas
+            tuner:
+              type: string
+              example: Standard
   securitySchemes:
     ApiKey:
       type: apiKey

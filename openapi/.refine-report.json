@@ -21,6 +21,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "vehicle-api-inventory-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "vehicle-api-makes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "vehicle-api-media-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "vehicle-api-models-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "vehicle-api-pricing-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "vehicle-api-specs-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "vehicle-api-styles-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }
