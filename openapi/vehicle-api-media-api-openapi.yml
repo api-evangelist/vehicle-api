@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Vehicle API (Edmunds) Inventory Media API
+  title: Vehicle API (Edmunds) Media API
   description: The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.
   version: '2.0'
   contact:
@@ -69,6 +69,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    PhotoListResponse:
+      type: object
+      properties:
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        photosCount:
+          type: integer
     Photo:
       type: object
       description: Vehicle photo asset with multiple size variants
@@ -104,15 +113,6 @@ components:
               link:
                 type: string
                 format: uri
-    PhotoListResponse:
-      type: object
-      properties:
-        photos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Photo'
-        photosCount:
-          type: integer
   securitySchemes:
     ApiKey:
       type: apiKey

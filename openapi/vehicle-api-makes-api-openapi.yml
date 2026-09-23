@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Vehicle API (Edmunds) Inventory Makes API
+  title: Vehicle API (Edmunds) Makes API
   description: The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.
   version: '2.0'
   contact:
@@ -85,22 +85,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ModelSummary:
+    MakeListResponse:
       type: object
-      description: Summary representation of a vehicle model
       properties:
-        id:
-          type: string
-          description: Model identifier (Make_Model format)
-          example: Toyota_Camry
-        name:
-          type: string
-          description: Model display name
-          example: Camry
-        niceName:
-          type: string
-          description: URL-friendly model name
-          example: camry
+        makes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Make'
+        makesCount:
+          type: integer
     Make:
       type: object
       description: Vehicle manufacturer make
@@ -122,15 +115,22 @@ components:
           description: Models for this make (in full view)
           items:
             $ref: '#/components/schemas/ModelSummary'
-    MakeListResponse:
+    ModelSummary:
       type: object
+      description: Summary representation of a vehicle model
       properties:
-        makes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Make'
-        makesCount:
-          type: integer
+        id:
+          type: string
+          description: Model identifier (Make_Model format)
+          example: Toyota_Camry
+        name:
+          type: string
+          description: Model display name
+          example: Camry
+        niceName:
+          type: string
+          description: URL-friendly model name
+          example: camry
   securitySchemes:
     ApiKey:
       type: apiKey

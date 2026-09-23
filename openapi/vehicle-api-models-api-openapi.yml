@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Vehicle API (Edmunds) Inventory Models API
+  title: Vehicle API (Edmunds) Models API
   description: The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.
   version: '2.0'
   contact:
@@ -91,6 +91,30 @@ components:
             $ref: '#/components/schemas/Model'
         modelsCount:
           type: integer
+    StyleSummary:
+      type: object
+      description: Summary of a vehicle style (trim)
+      properties:
+        id:
+          type: integer
+          description: Style ID
+          example: 401890697
+        name:
+          type: string
+          description: Full style name (trim + body style)
+          example: LE 4dr Sedan
+        submodel:
+          type: object
+          properties:
+            body:
+              type: string
+              example: Sedan
+            fuel:
+              type: string
+              example: Gas
+            tuner:
+              type: string
+              example: Standard
     ModelYear:
       type: object
       description: A specific model year with available styles
@@ -126,30 +150,6 @@ components:
         niceName:
           type: string
           example: toyota
-    StyleSummary:
-      type: object
-      description: Summary of a vehicle style (trim)
-      properties:
-        id:
-          type: integer
-          description: Style ID
-          example: 401890697
-        name:
-          type: string
-          description: Full style name (trim + body style)
-          example: LE 4dr Sedan
-        submodel:
-          type: object
-          properties:
-            body:
-              type: string
-              example: Sedan
-            fuel:
-              type: string
-              example: Gas
-            tuner:
-              type: string
-              example: Standard
     Model:
       type: object
       description: Detailed vehicle model information

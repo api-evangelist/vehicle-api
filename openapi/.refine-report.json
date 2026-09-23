@@ -1,13 +1,7 @@
 {
   "provider": "vehicle-api",
   "sources": [
-    "vehicle-api-inventory-api-openapi.yml",
-    "vehicle-api-makes-api-openapi.yml",
-    "vehicle-api-media-api-openapi.yml",
-    "vehicle-api-models-api-openapi.yml",
-    "vehicle-api-pricing-api-openapi.yml",
-    "vehicle-api-specs-api-openapi.yml",
-    "vehicle-api-styles-api-openapi.yml"
+    "_ae-authored/vehicle-api-openapi.yml"
   ],
   "outputs": [
     "vehicle-api-inventory-api-openapi.yml",
@@ -22,14 +16,17 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "vehicle-api-inventory-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "vehicle-api-makes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "vehicle-api-media-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "vehicle-api-models-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "vehicle-api-pricing-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "vehicle-api-specs-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "vehicle-api-styles-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "vehicle-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "vehicle-api-inventory-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vehicle-api-makes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vehicle-api-media-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vehicle-api-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vehicle-api-pricing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vehicle-api-specs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vehicle-api-styles-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Vehicle API (Edmunds) Inventory Pricing API
+  title: Vehicle API (Edmunds) Pricing API
   description: The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.
   version: '2.0'
   contact:
