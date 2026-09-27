@@ -129,47 +129,6 @@ components:
             tuner:
               type: string
               example: Standard
-    Style:
-      type: object
-      description: Complete vehicle style (trim) with specs, options, and pricing
-      properties:
-        id:
-          type: integer
-          description: Style ID
-          example: 401890697
-        name:
-          type: string
-          description: Full style name
-          example: LE 4dr Sedan
-        year:
-          $ref: '#/components/schemas/ModelYear'
-        make:
-          $ref: '#/components/schemas/MakeSummary'
-        model:
-          $ref: '#/components/schemas/ModelSummary'
-        price:
-          $ref: '#/components/schemas/StylePrice'
-        squishVins:
-          type: array
-          description: VIN squish codes for this style
-          items:
-            type: string
-        categories:
-          type: object
-          description: Vehicle category classifications
-          properties:
-            primaryBodyType:
-              type: string
-              example: Cars
-            vehicleStyle:
-              type: string
-              example: Sedan
-            vehicleType:
-              type: string
-              example: Car
-            market:
-              type: string
-              example: Mainstream
     ModelYear:
       type: object
       description: A specific model year with available styles
@@ -221,6 +180,47 @@ components:
           type: string
           description: URL-friendly model name
           example: camry
+    Style:
+      type: object
+      description: Complete vehicle style (trim) with specs, options, and pricing
+      properties:
+        id:
+          type: integer
+          description: Style ID
+          example: 401890697
+        name:
+          type: string
+          description: Full style name
+          example: LE 4dr Sedan
+        year:
+          $ref: '#/components/schemas/ModelYear'
+        make:
+          $ref: '#/components/schemas/MakeSummary'
+        model:
+          $ref: '#/components/schemas/ModelSummary'
+        price:
+          $ref: '#/components/schemas/StylePrice'
+        squishVins:
+          type: array
+          description: VIN squish codes for this style
+          items:
+            type: string
+        categories:
+          type: object
+          description: Vehicle category classifications
+          properties:
+            primaryBodyType:
+              type: string
+              example: Cars
+            vehicleStyle:
+              type: string
+              example: Sedan
+            vehicleType:
+              type: string
+              example: Car
+            market:
+              type: string
+              example: Mainstream
   securitySchemes:
     ApiKey:
       type: apiKey
