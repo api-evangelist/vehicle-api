@@ -85,26 +85,63 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    StylePrice:
+    Style:
       type: object
-      description: Pricing information for a vehicle style
+      description: Complete vehicle style (trim) with specs, options, and pricing
       properties:
-        baseMSRP:
-          type: number
-          description: Manufacturer Suggested Retail Price
-          example: 27515
-        baseInvoice:
-          type: number
-          description: Dealer invoice price
-          example: 25940
-        tmv:
-          type: number
-          description: True Market Value estimate
-          example: 26800
-        destinationCharge:
-          type: number
-          description: Destination and delivery charge
-          example: 1095
+        id:
+          type: integer
+          description: Style ID
+          example: 401890697
+        name:
+          type: string
+          description: Full style name
+          example: LE 4dr Sedan
+        year:
+          $ref: '#/components/schemas/ModelYear'
+        make:
+          $ref: '#/components/schemas/MakeSummary'
+        model:
+          $ref: '#/components/schemas/ModelSummary'
+        price:
+          $ref: '#/components/schemas/StylePrice'
+        squishVins:
+          type: array
+          description: VIN squish codes for this style
+          items:
+            type: string
+        categories:
+          type: object
+          description: Vehicle category classifications
+          properties:
+            primaryBodyType:
+              type: string
+              example: Cars
+            vehicleStyle:
+              type: string
+              example: Sedan
+            vehicleType:
+              type: string
+              example: Car
+            market:
+              type: string
+              example: Mainstream
+    ModelSummary:
+      type: object
+      description: Summary representation of a vehicle model
+      properties:
+        id:
+          type: string
+          description: Model identifier (Make_Model format)
+          example: Toyota_Camry
+        name:
+          type: string
+          description: Model display name
+          example: Camry
+        niceName:
+          type: string
+          description: URL-friendly model name
+          example: camry
     StyleSummary:
       type: object
       description: Summary of a vehicle style (trim)
@@ -164,63 +201,26 @@ components:
         niceName:
           type: string
           example: toyota
-    ModelSummary:
+    StylePrice:
       type: object
-      description: Summary representation of a vehicle model
+      description: Pricing information for a vehicle style
       properties:
-        id:
-          type: string
-          description: Model identifier (Make_Model format)
-          example: Toyota_Camry
-        name:
-          type: string
-          description: Model display name
-          example: Camry
-        niceName:
-          type: string
-          description: URL-friendly model name
-          example: camry
-    Style:
-      type: object
-      description: Complete vehicle style (trim) with specs, options, and pricing
-      properties:
-        id:
-          type: integer
-          description: Style ID
-          example: 401890697
-        name:
-          type: string
-          description: Full style name
-          example: LE 4dr Sedan
-        year:
-          $ref: '#/components/schemas/ModelYear'
-        make:
-          $ref: '#/components/schemas/MakeSummary'
-        model:
-          $ref: '#/components/schemas/ModelSummary'
-        price:
-          $ref: '#/components/schemas/StylePrice'
-        squishVins:
-          type: array
-          description: VIN squish codes for this style
-          items:
-            type: string
-        categories:
-          type: object
-          description: Vehicle category classifications
-          properties:
-            primaryBodyType:
-              type: string
-              example: Cars
-            vehicleStyle:
-              type: string
-              example: Sedan
-            vehicleType:
-              type: string
-              example: Car
-            market:
-              type: string
-              example: Mainstream
+        baseMSRP:
+          type: number
+          description: Manufacturer Suggested Retail Price
+          example: 27515
+        baseInvoice:
+          type: number
+          description: Dealer invoice price
+          example: 25940
+        tmv:
+          type: number
+          description: True Market Value estimate
+          example: 26800
+        destinationCharge:
+          type: number
+          description: Destination and delivery charge
+          example: 1095
   securitySchemes:
     ApiKey:
       type: apiKey

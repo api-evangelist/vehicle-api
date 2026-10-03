@@ -85,6 +85,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    MakeListResponse:
+      type: object
+      properties:
+        makes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Make'
+        makesCount:
+          type: integer
     ModelSummary:
       type: object
       description: Summary representation of a vehicle model
@@ -101,15 +110,6 @@ components:
           type: string
           description: URL-friendly model name
           example: camry
-    MakeListResponse:
-      type: object
-      properties:
-        makes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Make'
-        makesCount:
-          type: integer
     Make:
       type: object
       description: Vehicle manufacturer make

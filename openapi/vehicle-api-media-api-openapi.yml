@@ -69,15 +69,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PhotoListResponse:
-      type: object
-      properties:
-        photos:
-          type: array
-          items:
-            $ref: '#/components/schemas/Photo'
-        photosCount:
-          type: integer
     Photo:
       type: object
       description: Vehicle photo asset with multiple size variants
@@ -113,6 +104,15 @@ components:
               link:
                 type: string
                 format: uri
+    PhotoListResponse:
+      type: object
+      properties:
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photo'
+        photosCount:
+          type: integer
   securitySchemes:
     ApiKey:
       type: apiKey

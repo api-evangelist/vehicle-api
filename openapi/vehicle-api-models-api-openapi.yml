@@ -82,6 +82,37 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ModelListResponse:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+        modelsCount:
+          type: integer
+    Model:
+      type: object
+      description: Detailed vehicle model information
+      properties:
+        id:
+          type: string
+          description: Model identifier
+          example: Toyota_Camry
+        name:
+          type: string
+          description: Model display name
+          example: Camry
+        niceName:
+          type: string
+          description: URL-friendly model name
+          example: camry
+        make:
+          $ref: '#/components/schemas/MakeSummary'
+        years:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelYear'
     StyleSummary:
       type: object
       description: Summary of a vehicle style (trim)
@@ -128,15 +159,6 @@ components:
           description: Available trim styles for this year
           items:
             $ref: '#/components/schemas/StyleSummary'
-    ModelListResponse:
-      type: object
-      properties:
-        models:
-          type: array
-          items:
-            $ref: '#/components/schemas/Model'
-        modelsCount:
-          type: integer
     MakeSummary:
       type: object
       description: Summary representation of a vehicle make
@@ -150,28 +172,6 @@ components:
         niceName:
           type: string
           example: toyota
-    Model:
-      type: object
-      description: Detailed vehicle model information
-      properties:
-        id:
-          type: string
-          description: Model identifier
-          example: Toyota_Camry
-        name:
-          type: string
-          description: Model display name
-          example: Camry
-        niceName:
-          type: string
-          description: URL-friendly model name
-          example: camry
-        make:
-          $ref: '#/components/schemas/MakeSummary'
-        years:
-          type: array
-          items:
-            $ref: '#/components/schemas/ModelYear'
   securitySchemes:
     ApiKey:
       type: apiKey
