@@ -111,6 +111,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    InventoryResponse:
+      type: object
+      properties:
+        inventories:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryItem'
+        totalCount:
+          type: integer
+        pageSize:
+          type: integer
+        pageNum:
+          type: integer
     InventoryItem:
       type: object
       description: A vehicle in dealer inventory
@@ -160,19 +173,6 @@ components:
           type: integer
           description: Odometer reading (for used vehicles)
           example: 0
-    InventoryResponse:
-      type: object
-      properties:
-        inventories:
-          type: array
-          items:
-            $ref: '#/components/schemas/InventoryItem'
-        totalCount:
-          type: integer
-        pageSize:
-          type: integer
-        pageNum:
-          type: integer
   securitySchemes:
     ApiKey:
       type: apiKey

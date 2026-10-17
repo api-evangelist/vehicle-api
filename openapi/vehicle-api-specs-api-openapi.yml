@@ -109,6 +109,42 @@ components:
             tuner:
               type: string
               example: Standard
+    ModelSummary:
+      type: object
+      description: Summary representation of a vehicle model
+      properties:
+        id:
+          type: string
+          description: Model identifier (Make_Model format)
+          example: Toyota_Camry
+        name:
+          type: string
+          description: Model display name
+          example: Camry
+        niceName:
+          type: string
+          description: URL-friendly model name
+          example: camry
+    StylePrice:
+      type: object
+      description: Pricing information for a vehicle style
+      properties:
+        baseMSRP:
+          type: number
+          description: Manufacturer Suggested Retail Price
+          example: 27515
+        baseInvoice:
+          type: number
+          description: Dealer invoice price
+          example: 25940
+        tmv:
+          type: number
+          description: True Market Value estimate
+          example: 26800
+        destinationCharge:
+          type: number
+          description: Destination and delivery charge
+          example: 1095
     ModelYear:
       type: object
       description: A specific model year with available styles
@@ -131,26 +167,6 @@ components:
           description: Available trim styles for this year
           items:
             $ref: '#/components/schemas/StyleSummary'
-    StylePrice:
-      type: object
-      description: Pricing information for a vehicle style
-      properties:
-        baseMSRP:
-          type: number
-          description: Manufacturer Suggested Retail Price
-          example: 27515
-        baseInvoice:
-          type: number
-          description: Dealer invoice price
-          example: 25940
-        tmv:
-          type: number
-          description: True Market Value estimate
-          example: 26800
-        destinationCharge:
-          type: number
-          description: Destination and delivery charge
-          example: 1095
     Style:
       type: object
       description: Complete vehicle style (trim) with specs, options, and pricing
@@ -192,22 +208,6 @@ components:
             market:
               type: string
               example: Mainstream
-    ModelSummary:
-      type: object
-      description: Summary representation of a vehicle model
-      properties:
-        id:
-          type: string
-          description: Model identifier (Make_Model format)
-          example: Toyota_Camry
-        name:
-          type: string
-          description: Model display name
-          example: Camry
-        niceName:
-          type: string
-          description: URL-friendly model name
-          example: camry
     MakeSummary:
       type: object
       description: Summary representation of a vehicle make

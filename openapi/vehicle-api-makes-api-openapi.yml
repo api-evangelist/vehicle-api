@@ -85,31 +85,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    MakeListResponse:
-      type: object
-      properties:
-        makes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Make'
-        makesCount:
-          type: integer
-    ModelSummary:
-      type: object
-      description: Summary representation of a vehicle model
-      properties:
-        id:
-          type: string
-          description: Model identifier (Make_Model format)
-          example: Toyota_Camry
-        name:
-          type: string
-          description: Model display name
-          example: Camry
-        niceName:
-          type: string
-          description: URL-friendly model name
-          example: camry
     Make:
       type: object
       description: Vehicle manufacturer make
@@ -131,6 +106,31 @@ components:
           description: Models for this make (in full view)
           items:
             $ref: '#/components/schemas/ModelSummary'
+    ModelSummary:
+      type: object
+      description: Summary representation of a vehicle model
+      properties:
+        id:
+          type: string
+          description: Model identifier (Make_Model format)
+          example: Toyota_Camry
+        name:
+          type: string
+          description: Model display name
+          example: Camry
+        niceName:
+          type: string
+          description: URL-friendly model name
+          example: camry
+    MakeListResponse:
+      type: object
+      properties:
+        makes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Make'
+        makesCount:
+          type: integer
   securitySchemes:
     ApiKey:
       type: apiKey

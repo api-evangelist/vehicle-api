@@ -137,6 +137,19 @@ components:
           description: Available trim styles for this year
           items:
             $ref: '#/components/schemas/StyleSummary'
+    MakeSummary:
+      type: object
+      description: Summary representation of a vehicle make
+      properties:
+        id:
+          type: integer
+          example: 200001444
+        name:
+          type: string
+          example: Toyota
+        niceName:
+          type: string
+          example: toyota
     Model:
       type: object
       description: Detailed vehicle model information
@@ -159,19 +172,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ModelYear'
-    MakeSummary:
-      type: object
-      description: Summary representation of a vehicle make
-      properties:
-        id:
-          type: integer
-          example: 200001444
-        name:
-          type: string
-          example: Toyota
-        niceName:
-          type: string
-          example: toyota
   securitySchemes:
     ApiKey:
       type: apiKey
