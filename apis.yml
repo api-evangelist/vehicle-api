@@ -262,6 +262,8 @@ apis:
   - type: Examples
     url: examples/vehicle-api-style-example.json
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/vehicle-api/overview
   - type: Plans
     url: plans/vehicle-api-plans-pricing.yml
   - type: RateLimits
