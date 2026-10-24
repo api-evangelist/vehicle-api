@@ -1,251 +1,268 @@
 {
+  "info": {
+    "_postman_id": "7978186d-bbd1-4365-86c3-206094281a86",
+    "name": "Vehicle API (Edmunds) Inventory API",
+    "description": "The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.\n\nContact Support:\n Name: Edmunds Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:30:11.000Z",
+    "updatedAt": "2026-10-22T01:30:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7978186d-bbd1-4365-86c3-206094281a86"
+  },
   "item": [
     {
-      "id": "fa41d68b-0ab5-4128-a69e-c943abb83280",
-      "name": "Inventory",
-      "description": {
-        "content": "Dealer vehicle inventory",
-        "type": "text/plain"
-      },
+      "name": "vehicle",
       "item": [
         {
-          "id": "89024b64-2e1e-4e25-9776-e1083c2bffed",
-          "name": "Vehicle API Search Inventory",
-          "request": {
-            "name": "Vehicle API Search Inventory",
-            "description": {
-              "content": "Search dealer inventory for vehicles matching make, model, year, and geographic criteria. Returns a list of matching vehicles with dealer information, pricing, and listing details.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "vehicle",
-                "v2",
-                "inventory"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "make",
-                  "value": "<string>",
-                  "description": "(Required) Vehicle make nice name (e.g. toyota)"
-                },
-                {
-                  "disabled": false,
-                  "key": "model",
-                  "value": "<string>",
-                  "description": "(Required) Vehicle model nice name (e.g. camry)"
-                },
-                {
-                  "disabled": false,
-                  "key": "year",
-                  "value": "<integer>",
-                  "description": "Model year filter"
-                },
-                {
-                  "disabled": false,
-                  "key": "zip",
-                  "value": "<string>",
-                  "description": "(Required) 5-digit ZIP code for dealer search"
-                },
-                {
-                  "disabled": false,
-                  "key": "radius",
-                  "value": "50",
-                  "description": "Search radius in miles (default 50)"
-                },
-                {
-                  "disabled": false,
-                  "key": "pageSize",
-                  "value": "25",
-                  "description": "Results per page (max 100)"
-                },
-                {
-                  "disabled": false,
-                  "key": "pageNum",
-                  "value": "1",
-                  "description": "Page number (1-based)"
-                },
-                {
-                  "disabled": false,
-                  "key": "api_key",
-                  "value": "<string>",
-                  "description": "(Required) Edmunds API key"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "v2",
+          "item": [
             {
-              "id": "74751175-d089-4d14-8c9f-9721f5d69b41",
-              "name": "Inventory search results",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vehicle",
-                    "v2",
-                    "inventory"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+              "name": "inventory",
+              "item": [
+                {
+                  "name": "Vehicle API Search Inventory",
+                  "id": "85db4ad4-431c-4053-9ff9-72a9f3b89601",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vehicle/v2/inventory?make=<string>&model=<string>&year=<integer>&zip=<string>&radius=50&pageSize=25&pageNum=1&api_key=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vehicle",
+                        "v2",
+                        "inventory"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Vehicle make nice name (e.g. toyota)",
+                          "key": "make",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Vehicle model nice name (e.g. camry)",
+                          "key": "model",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Model year filter",
+                          "key": "year",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "(Required) 5-digit ZIP code for dealer search",
+                          "key": "zip",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Search radius in miles (default 50)",
+                          "key": "radius",
+                          "value": "50"
+                        },
+                        {
+                          "description": "Results per page (max 100)",
+                          "key": "pageSize",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Page number (1-based)",
+                          "key": "pageNum",
+                          "value": "1"
+                        },
+                        {
+                          "description": "(Required) Edmunds API key",
+                          "key": "api_key",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Search dealer inventory for vehicles matching make, model, year, and geographic criteria. Returns a list of matching vehicles with dealer information, pricing, and listing details."
+                  },
+                  "response": [
                     {
-                      "key": "make",
-                      "value": "toyota"
+                      "id": "dc427081-3532-498c-9f7e-d22aea09aea3",
+                      "name": "Inventory search results",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/vehicle/v2/inventory?make=<string>&model=<string>&year=<integer>&zip=<string>&radius=50&pageSize=25&pageNum=1&api_key=<API Key>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "vehicle",
+                            "v2",
+                            "inventory"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Vehicle make nice name (e.g. toyota)",
+                              "key": "make",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Vehicle model nice name (e.g. camry)",
+                              "key": "model",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Model year filter",
+                              "key": "year",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "(Required) 5-digit ZIP code for dealer search",
+                              "key": "zip",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Search radius in miles (default 50)",
+                              "key": "radius",
+                              "value": "50"
+                            },
+                            {
+                              "description": "Results per page (max 100)",
+                              "key": "pageSize",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Page number (1-based)",
+                              "key": "pageNum",
+                              "value": "1"
+                            },
+                            {
+                              "description": "(Required) Edmunds API key",
+                              "key": "api_key",
+                              "value": "<API Key>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"inventories\": [\n    {\n      \"vin\": \"<string>\",\n      \"type\": \"cpo\",\n      \"make\": \"<string>\",\n      \"model\": \"<string>\",\n      \"year\": \"<integer>\",\n      \"styleId\": \"<integer>\",\n      \"trim\": \"<string>\",\n      \"price\": \"<number>\",\n      \"dealerPrice\": \"<number>\",\n      \"dealerId\": \"<integer>\",\n      \"zip\": \"<string>\",\n      \"mileage\": \"<integer>\"\n    },\n    {\n      \"vin\": \"<string>\",\n      \"type\": \"used\",\n      \"make\": \"<string>\",\n      \"model\": \"<string>\",\n      \"year\": \"<integer>\",\n      \"styleId\": \"<integer>\",\n      \"trim\": \"<string>\",\n      \"price\": \"<number>\",\n      \"dealerPrice\": \"<number>\",\n      \"dealerId\": \"<integer>\",\n      \"zip\": \"<string>\",\n      \"mileage\": \"<integer>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\",\n  \"pageSize\": \"<integer>\",\n  \"pageNum\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T01:30:11.000Z",
+                      "updatedAt": "2026-10-22T01:30:11.000Z",
+                      "uid": "35240-dc427081-3532-498c-9f7e-d22aea09aea3"
                     },
                     {
-                      "key": "model",
-                      "value": "camry"
-                    },
-                    {
-                      "key": "year",
-                      "value": "2025"
-                    },
-                    {
-                      "key": "zip",
-                      "value": "90210"
-                    },
-                    {
-                      "key": "radius",
-                      "value": "50"
-                    },
-                    {
-                      "key": "pageSize",
-                      "value": "25"
-                    },
-                    {
-                      "key": "pageNum",
-                      "value": "1"
-                    },
-                    {
-                      "key": "api_key",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "api_key",
-                      "value": "<API Key>"
+                      "id": "e33071f5-f20a-4324-be86-0c3c1cc8fb3b",
+                      "name": "Missing required parameters",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/vehicle/v2/inventory?make=<string>&model=<string>&year=<integer>&zip=<string>&radius=50&pageSize=25&pageNum=1&api_key=<API Key>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "vehicle",
+                            "v2",
+                            "inventory"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Vehicle make nice name (e.g. toyota)",
+                              "key": "make",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Vehicle model nice name (e.g. camry)",
+                              "key": "model",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Model year filter",
+                              "key": "year",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "(Required) 5-digit ZIP code for dealer search",
+                              "key": "zip",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Search radius in miles (default 50)",
+                              "key": "radius",
+                              "value": "50"
+                            },
+                            {
+                              "description": "Results per page (max 100)",
+                              "key": "pageSize",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Page number (1-based)",
+                              "key": "pageNum",
+                              "value": "1"
+                            },
+                            {
+                              "description": "(Required) Edmunds API key",
+                              "key": "api_key",
+                              "value": "<API Key>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:30:11.000Z",
+                      "updatedAt": "2026-10-22T01:30:11.000Z",
+                      "uid": "35240-e33071f5-f20a-4324-be86-0c3c1cc8fb3b"
                     }
                   ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "createdAt": "2026-10-22T01:30:11.000Z",
+                  "updatedAt": "2026-10-22T01:30:11.000Z",
+                  "uid": "35240-85db4ad4-431c-4053-9ff9-72a9f3b89601"
                 }
               ],
-              "body": "{\n  \"inventories\": [\n    {\n      \"vin\": \"4T1C11AK0SU123456\",\n      \"type\": \"new\",\n      \"make\": \"toyota\",\n      \"model\": \"camry\",\n      \"year\": 2025,\n      \"styleId\": 401890697,\n      \"trim\": \"LE\",\n      \"price\": 27515,\n      \"dealerPrice\": 26800,\n      \"dealerId\": 12345,\n      \"zip\": \"90210\"\n    }\n  ],\n  \"totalCount\": 1\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ff78da0a-e11a-4458-b665-64fe4cc47a50",
-              "name": "Missing required parameters",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vehicle",
-                    "v2",
-                    "inventory"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "make",
-                      "value": "toyota"
-                    },
-                    {
-                      "key": "model",
-                      "value": "camry"
-                    },
-                    {
-                      "key": "year",
-                      "value": "2025"
-                    },
-                    {
-                      "key": "zip",
-                      "value": "90210"
-                    },
-                    {
-                      "key": "radius",
-                      "value": "50"
-                    },
-                    {
-                      "key": "pageSize",
-                      "value": "25"
-                    },
-                    {
-                      "key": "pageNum",
-                      "value": "1"
-                    },
-                    {
-                      "key": "api_key",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "api_key",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "id": "e1857bcf-8be6-44b1-8fe1-1994ee3abf8c",
+              "createdAt": "2026-10-22T01:30:11.000Z",
+              "updatedAt": "2026-10-22T01:30:11.000Z",
+              "uid": "35240-e1857bcf-8be6-44b1-8fe1-1994ee3abf8c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "0b03bfc2-066a-43d0-a7c3-2fc0b651c429",
+          "createdAt": "2026-10-22T01:30:11.000Z",
+          "updatedAt": "2026-10-22T01:30:11.000Z",
+          "uid": "35240-0b03bfc2-066a-43d0-a7c3-2fc0b651c429"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.edmunds.com/api",
-      "key": "baseUrl"
+      "id": "8f005116-0321-4ccc-a15d-33f95761ab8d",
+      "createdAt": "2026-10-22T01:30:11.000Z",
+      "updatedAt": "2026-10-22T01:30:11.000Z",
+      "uid": "35240-8f005116-0321-4ccc-a15d-33f95761ab8d"
     }
   ],
   "auth": {
@@ -253,25 +270,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "api_key"
+        "value": "api_key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "query"
+        "value": "query",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e64a86aa-5501-4713-a0f5-09e8c7e97408",
-    "name": "Vehicle API (Edmunds) Inventory API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Edmunds Vehicle API provides comprehensive automotive data including vehicle makes, models, trims, configurations, specifications, media assets, True Market Value (TMV) pricing, dealer inventories, incentives, and consumer reviews. All responses are in JSON format. Authentication is via API key.\n\nContact Support:\n Name: Edmunds Developer Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.edmunds.com/api"
     }
-  }
+  ]
 }
